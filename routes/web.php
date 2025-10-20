@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LeadController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,14 +24,18 @@ Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::post('lead/send', [LeadController::class, 'sendLead']);
+
+Route::post('/reviews', [ReviewController::class, 'submit']);
+Route::get('/reviews', [ReviewController::class, 'list']);
+//Route::get('/', function () {
+//    return Inertia::render('Welcome', [
+//        'canLogin' => Route::has('login'),
+//        'canRegister' => Route::has('register'),
+//        'laravelVersion' => Application::VERSION,
+//        'phpVersion' => PHP_VERSION,
+//    ]);
+//});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
