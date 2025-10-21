@@ -4,8 +4,8 @@ export default function Header({ scrollToId }) {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const contacts = {
-        phone: "+373 60 123 456",
-        whatsapp: "+373 60 123 456",
+        phone: "+373 69 204 272",
+        whatsapp: "+373 69 204 272",
     };
 
     return (

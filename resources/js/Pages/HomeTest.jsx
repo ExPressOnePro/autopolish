@@ -6,8 +6,8 @@ import BeforeAfter from "@/Pages/Components/BeforeAfter.jsx";
 import Hero from "@/Pages/Components/Hero.jsx";
 import Pricing from "@/Pages/Components/Pricing.jsx";
 import ServiceCardsDetailed from "@/Pages/Components/ServiceCardsDetailed.jsx";
-import ContactForm from "@/Pages/Components/ContactForm.jsx";
 import Header from "@/Pages/Components/Header.jsx";
+import {Head} from "@inertiajs/react";
 
 
 
@@ -32,7 +32,7 @@ export default function Home({image, gallery, before, after, averageRating, tota
         setFormStatus('Отправляем...');
         setTimeout(() => {
             setFormStatus('Спасибо! Мы свяжемся с вами.');
-            setFormData({ name: '', phone: '', message: '' });
+            setFormData({name: '', phone: '', message: ''});
         }, 900);
     };
     const servicesRef = useRef(null);
@@ -41,13 +41,13 @@ export default function Home({image, gallery, before, after, averageRating, tota
     const contactRef = useRef(null);
 
     const scrollToSection = (ref) => {
-        ref.current?.scrollIntoView({ behavior: 'smooth' });
+        ref.current?.scrollIntoView({behavior: 'smooth'});
     };
     const scrollToId = (id) => {
         const tryScroll = () => {
             const el = document.getElementById(id);
             if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
+                el.scrollIntoView({behavior: 'smooth'});
             } else {
                 // повтор через 50ms, пока элемент не появится
                 setTimeout(tryScroll, 50);
@@ -93,10 +93,11 @@ export default function Home({image, gallery, before, after, averageRating, tota
                 <Contact/>
             </section>
 
-                {/* FOOTER */}
-                <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
-                    © 2025 Prime Detail. Все права защищены.
-                </footer>
+            {/* FOOTER */}
+            <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
+                © 2025 Prime Detail. Все права защищены.
+            </footer>
         </div>
-);
-}
+
+        );
+        }
