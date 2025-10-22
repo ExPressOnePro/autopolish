@@ -89,7 +89,7 @@ export default function Home({image, gallery, before, after, averageRating, tota
             </section>
 
 
-            <section ref={contactRef} id="contact" className="container mx-auto py-14 max-w-6xl">
+            <section ref={contactRef} id="Контакты" className="container mx-auto py-14 max-w-6xl">
                 <Contact/>
             </section>
 

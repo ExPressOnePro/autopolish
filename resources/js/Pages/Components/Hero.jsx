@@ -18,14 +18,14 @@ export default function Hero({ image, averageRating, totalReviews }) {
                 <div className="flex flex-wrap gap-3 mt-6">
                     <button className="btn bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white py-3 px-6 rounded-xl shadow-md font-semibold"
                             onClick={() =>
-                                document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })
+                                document.getElementById("Цены")?.scrollIntoView({ behavior: "smooth" })
                             }
                     >
                         Смотреть пакеты
                     </button>
                     <button className="btn bg-[#122131] border border-[#263545] shadow-none text-white py-3 px-6 rounded-xl font-semibold hover:bg-[#1c2a3b] transition-colors"
                             onClick={() =>
-                                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+                                document.getElementById("Контакты")?.scrollIntoView({ behavior: "smooth" })
                             }
                     >
 
