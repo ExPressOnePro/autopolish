@@ -1,0 +1,1 @@
+import{r,j as o}from"./app-2f0a5MvT.js";function f({children:s}){const e=r.useRef(),[n,i]=r.useState(!1);return r.useEffect(()=>{const t=new IntersectionObserver(([c])=>{c.isIntersecting&&(i(!0),t.disconnect())},{threshold:.1});return e.current&&t.observe(e.current),()=>t.disconnect()},[]),o.jsx("div",{ref:e,children:n?s:null})}export{f as default};
