@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import axiosInstance from "@/Pages/axiosInstance.js";
 
 export default function Gallery() {
     const [gallery, setGallery] = useState([]);
@@ -15,7 +16,7 @@ export default function Gallery() {
                     setIsVisible(true);
                 }
             },
-            { threshold: 0.2 } // 20% блока в видимости — считаем, что пользователь дошёл
+            { threshold: 0.2 }
         );
 
         if (galleryRef.current) {
@@ -39,7 +40,7 @@ export default function Gallery() {
 
             try {
                 const [res] = await Promise.all([
-                    axios.get("/gallery"),
+                    axiosInstance.get("/gallery"),
                     delay,
                 ]);
                 setGallery(res.data);

@@ -35,7 +35,6 @@ class LandingController extends Controller
     {
         $files = Storage::files('public/gallery');
 
-        // Формируем ссылки к каждому файлу
         $gallery = array_map(fn($file) => Storage::url($file), $files);
 
         return response()->json($gallery);
