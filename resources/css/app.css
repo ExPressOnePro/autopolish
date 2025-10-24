@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+    background-attachment: fixed;
+    transition: background-position 0.2s ease-out;
+}
+
+body:hover {
+    background-position: 100px 0;
+}
+
+

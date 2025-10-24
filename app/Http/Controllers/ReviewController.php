@@ -17,7 +17,6 @@ class ReviewController extends Controller
 
         $userIp = $request->ip();
 
-        // Проверяем, не оставлял ли этот IP отзыв за последние 24 часа
         $recentIpReview = Review::where('ip', $userIp)
             ->where('created_at', '>=', now()->subDay())
             ->first();

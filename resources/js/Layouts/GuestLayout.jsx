@@ -8,7 +8,7 @@ export default function Guest({ children }) {
     const ogImage = "/preview.jpg";
 
     return (
-        <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+        <div className="relative min-h-screen bg-gradient-to-b from-[#05080c] to-[#0b1220] text-[#eaf2fb] font-sans overflow-hidden">
             <Head>
                 <title>{siteTitle}</title>
 
@@ -30,15 +30,15 @@ export default function Guest({ children }) {
                 <meta property="og:url" content={window.location.href}/>
             </Head>
 
-            <div>
-                <Link href="/">
-                    <ApplicationLogo className="w-20 h-20 fill-current text-gray-500"/>
-                </Link>
+            {/* Эффект полировки по всей странице */}
+            <div className="absolute inset-0 pointer-events-none">
+                <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-[shine_8s_linear_infinite]"></div>
             </div>
 
-            <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <main className="relative z-10">
                 {children}
-            </div>
+            </main>
         </div>
     );
 }

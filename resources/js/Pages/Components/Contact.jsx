@@ -62,12 +62,12 @@ export default function Contacts() {
                     </div>
                     <div>
                         <h3 className="text-xl font-semibold text-white mb-2">Телефон</h3>
-                        <p>+373 60 123 456</p>
+                        <p>+373 69 204 272</p>
                     </div>
                     <div>
                         <h3 className="text-xl font-semibold text-white mb-2">WhatsApp</h3>
                         <p>
-                            <a href="https://wa.me/37360123456" className="text-blue-400 hover:underline">
+                            <a href="https://wa.me/37369204272" className="text-blue-400 hover:underline">
                                 Написать в WhatsApp
                             </a>
                         </p>

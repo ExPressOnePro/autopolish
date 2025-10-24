@@ -55,11 +55,16 @@ export default function Hero({ image, averageRating, totalReviews }) {
 
             {/* Правый блок с изображением */}
             <div className="relative rounded-3xl border border-[#1b3247] overflow-hidden shadow-lg">
-                <img
-                    src={image}
-                    alt="Полировка кузова"
-                    className="w-full h-auto object-cover rounded-3xl transition-transform duration-500 hover:scale-105"
-                />
+                {!image ? (
+                    <div className="w-32 h-32 bg-gray-700 animate-pulse rounded"></div>
+                ) : (
+                    <img
+                        src={image}
+                        alt="Полировка кузова"
+                        className="w-full h-auto object-cover rounded-3xl transition-transform duration-500 hover:scale-105"
+                        loading="lazy"
+                    />
+                )}
             </div>
         </section>
     );

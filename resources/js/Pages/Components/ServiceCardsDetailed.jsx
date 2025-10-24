@@ -49,7 +49,7 @@ export default function ServicesFull() {
     ];
 
     return (
-        <section id="services" className="container mx-auto py-20 px-4">
+        <div id="services" className="mx-auto py-20 px-4">
             <div className="text-center mb-14">
                 <h2 className="text-4xl font-bold text-white mb-3">Наши услуги</h2>
                 <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -61,7 +61,7 @@ export default function ServicesFull() {
                 {services.map((service, i) => (
                     <div
                         key={i}
-                        className="bg-[#0c1826] border border-[#1b3247] rounded-2xl overflow-hidden shadow-md flex flex-col justify-between"
+                        className=" rounded-2xl overflow-hidden shadow-md flex flex-col justify-between"
                     >
                         {/* Фото */}
                         <div className="relative h-64 overflow-hidden">
@@ -112,6 +112,6 @@ export default function ServicesFull() {
                     </div>
                 ))}
             </div>
-        </section>
+        </div>
     );
 }

@@ -1,17 +1,16 @@
-import React, {Suspense, useRef, useState} from 'react';
-import Reviews from "@/Pages/Components/Reviews.jsx";
-import Contact from "@/Pages/Components/Contact.jsx";
-import Gallery from "@/Pages/Components/Gallery.jsx";
+import React, {lazy, Suspense, useRef, useState} from 'react';
 import BeforeAfter from "@/Pages/Components/BeforeAfter.jsx";
 import Hero from "@/Pages/Components/Hero.jsx";
-import Pricing from "@/Pages/Components/Pricing.jsx";
 import ServiceCardsDetailed from "@/Pages/Components/ServiceCardsDetailed.jsx";
 import Header from "@/Pages/Components/Header.jsx";
-import {Head} from "@inertiajs/react";
+const Gallery = lazy(() => import('@/Pages/Components/Gallery'));
+const Reviews = lazy(() => import('@/Pages/Components/Reviews'));
+const Pricing = lazy(() => import('@/Pages/Components/Pricing'));
+const Contact = lazy(() => import('@/Pages/Components/Contact'));
 
 
 
-export default function Home({image, gallery, before, after, averageRating, totalReviews}) {
+export default function HomeTest({image, before, after, averageRating, totalReviews}) {
     const [clip, setClip] = useState(50);
     const [carClass, setCarClass] = useState(1);
     const [pack, setPack] = useState(14900);
@@ -57,26 +56,39 @@ export default function Home({image, gallery, before, after, averageRating, tota
     };
 
     return (
-        <div className="bg-gradient-to-b from-[#05080c] to-[#0b1220] text-[#eaf2fb] font-sans min-h-screen">
+        <Suspense fallback={<div>Loading...</div>}>
+        <div className="relative text-[#eaf2fb] font-sans min-h-screen overflow-x-hidden scroll-smooth">
 
+            <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+                {/* Основной градиент */}
+                <div className="absolute inset-0 bg-gradient-to-b from-[#05080c] to-[#0b1220]"/>
+
+                {/* Слой с мягким шумом (имитация лака) */}
+                <div className="absolute inset-0 opacity-15 mix-blend-overlay"/>
+
+                {/* Анимированный блик полировки */}
+                <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-polishMove"/>
+            </div>
             {/* HEADER */}
             <Header scrollToId={scrollToId}/>
 
             <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
 
-            <section ref={servicesRef} className="container mx-auto py-14">
-                <ServiceCardsDetailed ref={servicesRef}/>
-            </section>
+            <div id="Услуги" className="container mx-auto py-14">
+                <ServiceCardsDetailed/>
+            </div>
 
             <BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange}/>
 
-            <section ref={galleryRef} id="Галерея" className="container mx-auto py-14 max-w-6xl">
-                <Gallery gallery={gallery}/>
+            <section id="Галерея" className="mx-auto py-14 max-w-6xl">
+                <Gallery />
             </section>
 
             <section id="Отзывы" className="container mx-auto py-14 max-w-6xl">
                 <Reviews/>
             </section>
+
             <section ref={pricingRef} id="Цены" className="container mx-auto py-14 max-w-6xl ">
                 <Pricing
                     carClass={carClass}
@@ -98,6 +110,6 @@ export default function Home({image, gallery, before, after, averageRating, tota
                 © 2025 Prime Detail. Все права защищены.
             </footer>
         </div>
-
-        );
-        }
+        </Suspense>
+    );
+}

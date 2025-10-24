@@ -1,101 +1,106 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Head, useForm } from "@inertiajs/react";
+import React, {useRef, useState} from 'react';
+import Reviews from "@/Pages/Components/Reviews.jsx";
+import Contact from "@/Pages/Components/Contact.jsx";
+import Gallery from "@/Pages/Components/Gallery.jsx";
+import BeforeAfter from "@/Pages/Components/BeforeAfter.jsx";
+import Hero from "@/Pages/Components/Hero.jsx";
+import Pricing from "@/Pages/Components/Pricing.jsx";
+import ServiceCardsDetailed from "@/Pages/Components/ServiceCardsDetailed.jsx";
+import Header from "@/Pages/Components/Header.jsx";
 
-import Header from "@/Components/Landing/Header";
-import Hero from "@/Components/Landing/Hero";
-import Services from "@/Components/Landing/Services";
-import Pricing from "@/Components/Landing/Pricing";
-import Process from "@/Components/Landing/Process";
-import BeforeAfter from "@/Components/Landing/BeforeAfter";
-import Gallery from "@/Components/Landing/Gallery";
-import Reviews from "@/Components/Landing/Reviews";
-import Booking from "@/Components/Landing/Booking";
-import Contact from "@/Components/Landing/Contact";
-import Footer from "@/Components/Landing/Footer";
 
-export default function Landing({ reviews = [] }) {
-    // состояния для калькулятора
-    const [cls, setCls] = useState(1.2);
-    const [pack, setPack] = useState(14900);
-    const price = useMemo(() => {
-        const p = Math.round((Number(pack) * Number(cls)) / 100) * 100;
-        return p.toLocaleString("ru-RU") + " ₽";
-    }, [cls, pack]);
-
-    // состояния для before/after
+export default function Landing({image, gallery, before, after, averageRating, totalReviews}) {
     const [clip, setClip] = useState(50);
-
-    // формы
-    const booking = useForm({
-        name: "",
-        phone: "",
-        service: "Полировка Pro + керамика",
-        message: "",
+    const [carClass, setCarClass] = useState(1);
+    const [pack, setPack] = useState(14900);
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        message: ''
     });
+    const [formStatus, setFormStatus] = useState('');
+    const [menuOpen, setMenuOpen] = useState(false);
 
-    const review = useForm({ name: "", rating: 5, message: "" });
+    const calcResult = Math.round(pack * carClass / 100) * 100;
 
-    // refs для меню
-    const burgerRef = useRef(null);
-    const menuRef = useRef(null);
+    const handleRange = (e) => setClip(Number(e.target.value));
 
-    // логика мобильного меню
-    useEffect(() => {
-        const burger = burgerRef.current;
-        const menu = menuRef.current;
-        if (!burger || !menu) return;
-        const toggle = () => menu.classList.toggle("show");
-        burger.addEventListener("click", toggle);
-        return () => burger.removeEventListener("click", toggle);
-    }, []);
+    const submitForm = (e) => {
+        e.preventDefault();
+        setFormStatus('Отправляем...');
+        setTimeout(() => {
+            setFormStatus('Спасибо! Мы свяжемся с вами.');
+            setFormData({name: '', phone: '', message: ''});
+        }, 900);
+    };
+    const servicesRef = useRef(null);
+    const pricingRef = useRef(null);
+    const galleryRef = useRef(null);
+    const contactRef = useRef(null);
 
-    // плавный скролл
-    useEffect(() => {
-        const menu = menuRef.current;
-        const links = document.querySelectorAll('a[href^="#"]');
-        const onClick = (e) => {
-            const id = e.currentTarget.getAttribute("href").slice(1);
+    const scrollToSection = (ref) => {
+        ref.current?.scrollIntoView({behavior: 'smooth'});
+    };
+    const scrollToId = (id) => {
+        const tryScroll = () => {
             const el = document.getElementById(id);
-            if (!el) return;
-            e.preventDefault();
-            el.scrollIntoView({ behavior: "smooth" });
-            if (menu && menu.classList.contains("show")) menu.classList.remove("show");
+            if (el) {
+                el.scrollIntoView({behavior: 'smooth'});
+            } else {
+                // повтор через 50ms, пока элемент не появится
+                setTimeout(tryScroll, 50);
+            }
         };
-        links.forEach((a) => a.addEventListener("click", onClick));
-        return () => links.forEach((a) => a.removeEventListener("click", onClick));
-    }, []);
+        tryScroll();
+    };
 
     return (
-        <>
-            <Head>
-                <title>
-                    Prime Detail — Профессиональная автополировка и защитные покрытия
-                </title>
-                <meta
-                    name="description"
-                    content="Профессиональная полировка кузова, удаление царапин, керамическая защита и восстановление блеска. Онлайн-запись и честные цены."
+        <div className="text-[#eaf2fb] font-sans min-h-screen">
+
+            HEADER
+            <Header scrollToId={scrollToId}/>
+
+            {!imagse ? (
+                <div className="w-32 h-32 bg-gray-700 animate-pulse rounded"></div>
+            ) : (
+                <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
+            )}
+            <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
+
+            <section id="Услуги" className="container mx-auto py-14">
+                <ServiceCardsDetailed ref={servicesRef}/>
+            </section>
+
+            <BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange}/>
+
+            <section ref={galleryRef} id="Галерея" className="container mx-auto py-14 max-w-6xl">
+                <Gallery gallery={gallery}/>
+            </section>
+
+            <section id="Отзывы" className="container mx-auto py-14 max-w-6xl">
+                <Reviews/>
+            </section>
+            <section ref={pricingRef} id="Цены" className="container mx-auto py-14 max-w-6xl ">
+                <Pricing
+                    carClass={carClass}
+                    setCarClass={setCarClass}
+                    pack={pack}
+                    setPack={setPack}
+                    calcResult={calcResult}
+                    scrollToId={scrollToId}
                 />
-                <meta name="theme-color" content="#0ea5e9" />
-            </Head>
+            </section>
 
-            {/* глобальные стили */}
-            <style>{`/* вставляем твои :root и все стили отсюда */`}</style>
 
-            <Header burgerRef={burgerRef} menuRef={menuRef} />
+            <section ref={contactRef} id="Контакты" className="container mx-auto py-14 max-w-6xl">
+                <Contact/>
+            </section>
 
-            <main>
-                <Hero />
-                <Services />
-                <Pricing cls={cls} setCls={setCls} pack={pack} setPack={setPack} price={price} />
-                <Process />
-                <BeforeAfter clip={clip} setClip={setClip} />
-                <Gallery />
-                <Reviews reviews={reviews} reviewForm={review} />
-                <Booking bookingForm={booking} />
-                <Contact />
-            </main>
+            {/* FOOTER */}
+            <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
+                © 2025 Prime Detail. Все права защищены.
+            </footer>
+        </div>
 
-            <Footer />
-        </>
     );
 }

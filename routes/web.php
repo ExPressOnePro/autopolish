@@ -21,8 +21,10 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/gallery', [LandingController::class, 'gallery']);
 Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+
 
 Route::post('lead/send', [LeadController::class, 'sendLead']);
 
