@@ -1,70 +1,89 @@
 export default function Hero({ image, averageRating, totalReviews }) {
     return (
-        <section className="container mx-auto max-w-6xl px-4 md:px-0 grid md:grid-cols-[1.1fr_.9fr] gap-8 py-16 items-center">
-            {/* Левый блок с текстом */}
-            <div className="bg-[#0f141b] p-8 md:p-10 rounded-3xl shadow-xl flex flex-col justify-between h-full">
-                <div>
-                    <span className="inline-block px-3 py-1 text-xs font-medium border rounded-full text-[#9bb3c9] bg-[#0c1826] border-[#1e3146]">
-                        Глубокая полировка • PPF • Антигравий
-                    </span>
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl mt-4 mb-4 font-bold text-white leading-tight">
-                        Вернём заводской блеск и защитим ваш автомобиль
-                    </h1>
-                    <p className="text-[#bcd2e6] leading-relaxed text-sm sm:text-base lg:text-lg">
-                        Удалим паутинку, оксид и мелкие дефекты. Покроем керамикой 9H или защитной плёнкой. Гарантия до 24 месяцев.
-                    </p>
-                </div>
+        <section className="relative w-full min-h-[90vh] flex items-center overflow-hidden">
 
-                <div className="flex flex-wrap gap-3 mt-6">
-                    <button className="btn bg-blue-600 hover:bg-blue-700 transition-all duration-300 text-white py-3 px-6 rounded-xl shadow-md font-semibold"
+            {/* Background Image */}
+            <div className="absolute inset-0">
+                {image && (
+                    <img
+                        src={image}
+                        alt="Полировка автомобиля"
+                        className="w-full h-full object-cover scale-105"
+                    />
+                )}
+
+                {/* Dark gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#060a0f] via-[#060a0fcc] to-transparent"></div>
+            </div>
+
+            {/* Content */}
+            <div className="relative container mx-auto max-w-6xl px-6">
+                <div className="max-w-xl backdrop-blur-md bg-[#0c1118cc] border border-[#1b2a3a] rounded-3xl p-10 shadow-2xl">
+
+                    <span className="text-xs uppercase tracking-widest text-blue-400">
+                        Premium Auto Detailing
+                    </span>
+
+                    <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mt-3">
+                        Идеальный блеск
+                        <span className="text-blue-500"> для вашего автомобиля</span>
+                    </h1>
+
+                    <p className="text-gray-300 mt-4 text-lg">
+                        Глубокая полировка, удаление царапин, керамическая защита и
+                        антигравийная пленка. Вернем вашему автомобилю вид,
+                        как будто он только что из салона.
+                    </p>
+
+                    {/* Buttons */}
+                    <div className="flex flex-wrap gap-4 mt-8">
+                        <button
                             onClick={() =>
                                 document.getElementById("Цены")?.scrollIntoView({ behavior: "smooth" })
                             }
-                    >
-                        Смотреть пакеты
-                    </button>
-                    <button className="btn bg-[#122131] border border-[#263545] shadow-none text-white py-3 px-6 rounded-xl font-semibold hover:bg-[#1c2a3b] transition-colors"
+                            className="bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl text-white font-semibold shadow-lg"
+                        >
+                            Смотреть пакеты
+                        </button>
+
+                        <button
                             onClick={() =>
                                 document.getElementById("Контакты")?.scrollIntoView({ behavior: "smooth" })
                             }
-                    >
-
-                        Бесплатная оценка
-                    </button>
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 mt-8 text-center">
-                    <div>
-                        <b className="text-white text-lg sm:text-xl lg:text-2xl">600+</b>
-                        <div className="text-[#9bb3c9] text-xs sm:text-sm">полированных авто</div>
+                            className="border border-gray-600 hover:border-blue-500 hover:text-blue-400 transition px-6 py-3 rounded-xl text-white"
+                        >
+                            Бесплатная оценка
+                        </button>
                     </div>
-                    <div>
-                        <b className="text-white text-lg sm:text-xl lg:text-2xl">
-                            {averageRating ? `${averageRating}/5` : '—'}
-                        </b>
-                        <div className="text-[#9bb3c9] text-xs sm:text-sm">
-                            рейтинг клиентов ({totalReviews})
+
+                    {/* Stats */}
+                    <div className="grid grid-cols-3 gap-6 mt-10 text-center border-t border-[#1b2a3a] pt-6">
+
+                        <div>
+                            <div className="text-2xl font-bold text-white">600+</div>
+                            <div className="text-gray-400 text-sm">
+                                авто отполировано
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <b className="text-white text-lg sm:text-xl lg:text-2xl">24 мес</b>
-                        <div className="text-[#9bb3c9] text-xs sm:text-sm">гарантия защиты</div>
+
+                        <div>
+                            <div className="text-2xl font-bold text-white flex items-center justify-center gap-1">
+                                ⭐ {averageRating ? averageRating : "—"}
+                            </div>
+                            <div className="text-gray-400 text-sm">
+                                отзывов ({totalReviews})
+                            </div>
+                        </div>
+
+                        <div>
+                            <div className="text-2xl font-bold text-white">24 мес</div>
+                            <div className="text-gray-400 text-sm">
+                                гарантия защиты
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
-
-            {/* Правый блок с изображением */}
-            <div className="relative rounded-3xl border border-[#1b3247] overflow-hidden shadow-lg">
-                {!image ? (
-                    <div className="w-32 h-32 bg-gray-700 animate-pulse rounded"></div>
-                ) : (
-                    <img
-                        src={image}
-                        alt="Полировка кузова"
-                        className="w-full h-auto object-cover rounded-3xl transition-transform duration-500 hover:scale-105"
-                        loading="lazy"
-                    />
-                )}
             </div>
         </section>
     );
