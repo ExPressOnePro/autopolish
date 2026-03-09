@@ -65,46 +65,46 @@ export default function Landing({image, gallery, before, after, averageRating, t
             >
                 Записаться
             </a>
-            {!image ? (
-                <div className="w-32 h-32 bg-gray-700 animate-pulse rounded"></div>
-            ) : (
-                <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
-            )}
-            <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
+            {/*{!image ? (*/}
+            {/*    <div className="w-32 h-32 bg-gray-700 animate-pulse rounded"></div>*/}
+            {/*) : (*/}
+            {/*    <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>*/}
+            {/*)}*/}
+            {/*<Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>*/}
 
-            <section id="Услуги" className="container mx-auto py-14">
-                <ServiceCardsDetailed ref={servicesRef}/>
-            </section>
+            {/*<section id="Услуги" className="container mx-auto py-14">*/}
+            {/*    <ServiceCardsDetailed ref={servicesRef}/>*/}
+            {/*</section>*/}
 
-            <BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange}/>
+            {/*<BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange}/>*/}
 
-            <section ref={galleryRef} id="Галерея" className="container mx-auto py-14 max-w-6xl">
-                <Gallery gallery={gallery}/>
-            </section>
+            {/*<section ref={galleryRef} id="Галерея" className="container mx-auto py-14 max-w-6xl">*/}
+            {/*    <Gallery gallery={gallery}/>*/}
+            {/*</section>*/}
 
-            <section id="Отзывы" className="container mx-auto py-14 max-w-6xl">
-                <Reviews/>
-            </section>
-            <section ref={pricingRef} id="Цены" className="container mx-auto py-14 max-w-6xl ">
-                <Pricing
-                    carClass={carClass}
-                    setCarClass={setCarClass}
-                    pack={pack}
-                    setPack={setPack}
-                    calcResult={calcResult}
-                    scrollToId={scrollToId}
-                />
-            </section>
+            {/*<section id="Отзывы" className="container mx-auto py-14 max-w-6xl">*/}
+            {/*    <Reviews/>*/}
+            {/*</section>*/}
+            {/*<section ref={pricingRef} id="Цены" className="container mx-auto py-14 max-w-6xl ">*/}
+            {/*    <Pricing*/}
+            {/*        carClass={carClass}*/}
+            {/*        setCarClass={setCarClass}*/}
+            {/*        pack={pack}*/}
+            {/*        setPack={setPack}*/}
+            {/*        calcResult={calcResult}*/}
+            {/*        scrollToId={scrollToId}*/}
+            {/*    />*/}
+            {/*</section>*/}
 
 
-            <section ref={contactRef} id="Контакты" className="container mx-auto py-14 max-w-6xl">
-                <Contact/>
-            </section>
+            {/*<section ref={contactRef} id="Контакты" className="container mx-auto py-14 max-w-6xl">*/}
+            {/*    <Contact/>*/}
+            {/*</section>*/}
 
-            {/* FOOTER */}
-            <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
-                © 2026 Prime Detail
-            </footer>
+            {/*/!* FOOTER *!/*/}
+            {/*<footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">*/}
+            {/*    © 2026 Prime Detail*/}
+            {/*</footer>*/}
         </div>
 
     );
