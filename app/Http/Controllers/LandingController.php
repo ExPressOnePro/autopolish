@@ -14,10 +14,10 @@ class LandingController extends Controller
     {
         $image = Storage::url('AutoPolish.jpg');
 
-        $averageRating = Review::avg('rating');
-        $averageRating = $averageRating ? round($averageRating, 2) : 0;
-
-        $totalReviews = Review::count();
+//        $averageRating = Review::avg('rating');
+//        $averageRating = $averageRating ? round($averageRating, 2) : 0;
+//
+//        $totalReviews = Review::count();
 
         $before = Storage::url('before2.webp');
         $after = Storage::url('after1.webp');
@@ -26,8 +26,8 @@ class LandingController extends Controller
             'image'         => $image,
             'before'        => $before,
             'after'         => $after,
-            'averageRating' => $averageRating,
-            'totalReviews'  => $totalReviews,
+//            'averageRating' => $averageRating,
+//            'totalReviews'  => $totalReviews,
         ]);
     }
 
