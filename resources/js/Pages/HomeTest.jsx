@@ -80,42 +80,42 @@ export default function HomeTest({image, before, after, averageRating, totalRevi
                 Записаться
             </a>
 
-            {/*<Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>*/}
+            <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
 
-            {/*<div id="Услуги" className="container mx-auto py-14">*/}
-            {/*    <ServiceCardsDetailed/>*/}
-            {/*</div>*/}
+            <div id="Услуги" className="container mx-auto py-14">
+                <ServiceCardsDetailed/>
+            </div>
 
-            {/*<BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange}/>*/}
+            <BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange}/>
 
-            {/*<section id="Галерея" className="mx-auto py-14 max-w-6xl">*/}
-            {/*    <Gallery />*/}
-            {/*</section>*/}
+            <section id="Галерея" className="mx-auto py-14 max-w-6xl">
+                <Gallery />
+            </section>
 
-            {/*<section id="Отзывы" className="container mx-auto py-14 max-w-6xl">*/}
-            {/*    <Reviews/>*/}
-            {/*</section>*/}
+            <section id="Отзывы" className="container mx-auto py-14 max-w-6xl">
+                <Reviews/>
+            </section>
 
-            {/*<section ref={pricingRef} id="Цены" className="container mx-auto py-14 max-w-6xl ">*/}
-            {/*    <Pricing*/}
-            {/*        carClass={carClass}*/}
-            {/*        setCarClass={setCarClass}*/}
-            {/*        pack={pack}*/}
-            {/*        setPack={setPack}*/}
-            {/*        calcResult={calcResult}*/}
-            {/*        scrollToId={scrollToId}*/}
-            {/*    />*/}
-            {/*</section>*/}
+            <section ref={pricingRef} id="Цены" className="container mx-auto py-14 max-w-6xl ">
+                <Pricing
+                    carClass={carClass}
+                    setCarClass={setCarClass}
+                    pack={pack}
+                    setPack={setPack}
+                    calcResult={calcResult}
+                    scrollToId={scrollToId}
+                />
+            </section>
 
 
-            {/*<section ref={contactRef} id="Контакты" className="container mx-auto py-14 max-w-6xl">*/}
-            {/*    <Contact/>*/}
-            {/*</section>*/}
+            <section ref={contactRef} id="Контакты" className="container mx-auto py-14 max-w-6xl">
+                <Contact/>
+            </section>
 
-            {/*/!* FOOTER *!/*/}
-            {/*<footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">*/}
-            {/*    © 2026 Prime Detail*/}
-            {/*</footer>*/}
+            {/* FOOTER */}
+            <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
+                © 2026 Prime Detail
+            </footer>
         </div>
         </Suspense>
     );
