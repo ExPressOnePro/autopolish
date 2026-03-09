@@ -38,7 +38,6 @@ export default function Pricing({ scrollToId }) {
                 boxShadow: "0 15px 40px rgba(34, 197, 94, 0.35)",
             },
         },
-
         {
             title: "Pro • Коррекция + 12 мес защита",
             price: "",
