@@ -154,18 +154,19 @@ export default function Contacts() {
                 </form>
             </div>
 
+
             {/* Карта */}
             <div className="mt-12 h-64 md:h-96 rounded-2xl overflow-hidden">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2720.123456!2d28.833333!3d47.010000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c8c00000000001%3A0xabcdef!2sPrime+Detail!5e0!3m2!1sen!2smd!4v169XXX"
-                    width="100%"
-                    height="100%"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d824.9456468757573!2d28.761004076585174!3d47.03759838334367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cbd7007acefa6f%3A0xca8f2c22dc797176!2z0J_QvtC70LjRgNC-0LLQutCwINCw0LLRgtC-0LzQvtCx0LjQu9C10Lk!5e1!3m2!1sru!2s!4v1773040883756!5m2!1sru!2s"
+                    width="100%"            // лучше 100% для адаптивности
+                    height="450"
                     style={{ border: 0 }}
-                    allowFullScreen=""
+                    allowFullScreen          // boolean
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     title="Prime Detail Map"
-                ></iframe>
+                />
             </div>
         </section>
     );

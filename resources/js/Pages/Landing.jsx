@@ -58,9 +58,14 @@ export default function Landing({image, gallery, before, after, averageRating, t
         <div className="text-[#eaf2fb] font-sans min-h-screen">
 
             HEADER
-            <Header scrollToId={scrollToId}/>
-
-            {!imagse ? (
+            {/*<Header scrollToId={scrollToId}/>*/}
+            <a
+                href="#contact"
+                className="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full shadow-lg hover:scale-105 transition z-50"
+            >
+                Записаться
+            </a>
+            {!image ? (
                 <div className="w-32 h-32 bg-gray-700 animate-pulse rounded"></div>
             ) : (
                 <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
@@ -98,7 +103,7 @@ export default function Landing({image, gallery, before, after, averageRating, t
 
             {/* FOOTER */}
             <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
-                © 2025 Prime Detail. Все права защищены.
+                © 2026 Prime Detail
             </footer>
         </div>
 

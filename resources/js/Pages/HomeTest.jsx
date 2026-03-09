@@ -59,6 +59,7 @@ export default function HomeTest({image, before, after, averageRating, totalRevi
         <Suspense fallback={<div>Loading...</div>}>
         <div className="relative text-[#eaf2fb] font-sans min-h-screen overflow-x-hidden scroll-smooth">
 
+            {/* Добавляем после основного градиента */}
             <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
                 {/* Основной градиент */}
                 <div className="absolute inset-0 bg-gradient-to-b from-[#05080c] to-[#0b1220]"/>
@@ -67,12 +68,30 @@ export default function HomeTest({image, before, after, averageRating, totalRevi
                 <div className="absolute inset-0 opacity-15 mix-blend-overlay"/>
 
                 {/* Анимированный блик полировки */}
-                <div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-polishMove"/>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-polishMove"/>
+
+                {/* Лампы слева */}
+                <div className="fixed top-0 left-0 h-full flex flex-col justify-around px-4 pointer-events-none z-0">
+                    <div className="w-3 h-64 bg-white opacity-30 transform -rotate-12 blur-xl rounded-lg"/>
+                    <div className="w-3 h-64 bg-white opacity-30 transform -rotate-12 blur-xl rounded-lg"/>
+                    <div className="w-3 h-64 bg-white opacity-30 transform -rotate-12 blur-xl rounded-lg"/>
+                </div>
+
+                {/* Лампы справа */}
+                <div className="fixed top-0 right-0 h-full flex flex-col justify-around px-4 pointer-events-none z-0">
+                    <div className="w-1 h-64 bg-white opacity-30 transform rotate-12 blur-xl rounded-lg"/>
+                    <div className="w-1 h-64 bg-white opacity-30 transform rotate-12 blur-xl rounded-lg"/>
+                    <div className="w-1 h-64 bg-white opacity-30 transform rotate-12 blur-xl rounded-lg"/>
+                </div>
             </div>
             {/* HEADER */}
             <Header scrollToId={scrollToId}/>
-
+            <a
+                href="#contact"
+                className="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full shadow-lg hover:scale-105 transition z-50"
+            >
+                Записаться
+            </a>
             <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
 
             <div id="Услуги" className="container mx-auto py-14">
@@ -107,7 +126,7 @@ export default function HomeTest({image, before, after, averageRating, totalRevi
 
             {/* FOOTER */}
             <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
-                © 2025 Prime Detail. Все права защищены.
+                © 2026 Prime Detail
             </footer>
         </div>
         </Suspense>
