@@ -1,54 +1,38 @@
-import React, {lazy, Suspense, useRef, useState} from 'react';
-import BeforeAfter from "@/Pages/Components/BeforeAfter.jsx";
-import Hero from "@/Pages/Components/Hero.jsx";
-import ServiceCardsDetailed from "@/Pages/Components/ServiceCardsDetailed.jsx";
-import Header from "@/Pages/Components/Header.jsx";
+import React, { lazy, Suspense, useState } from 'react';
+import { Head } from '@inertiajs/react';
+import BeforeAfter from '@/Pages/Components/BeforeAfter.jsx';
+import Hero from '@/Pages/Components/Hero.jsx';
+import SaleReady360 from '@/Pages/Components/SaleReady360.jsx';
+import ServiceCardsDetailed from '@/Pages/Components/ServiceCardsDetailed.jsx';
+import Header from '@/Pages/Components/Header.jsx';
+import LazySection from '@/Components/LazySection.jsx';
+
 const Gallery = lazy(() => import('@/Pages/Components/Gallery'));
 const Reviews = lazy(() => import('@/Pages/Components/Reviews'));
 const Pricing = lazy(() => import('@/Pages/Components/Pricing'));
 const Contact = lazy(() => import('@/Pages/Components/Contact'));
 
+function SectionFallback({ label }) {
+    return (
+        <div className="container mx-auto max-w-6xl px-4 py-14">
+            <div className="h-48 rounded-2xl bg-gradient-to-br from-[#0c1826] to-[#101a28] animate-pulse flex items-center justify-center text-gray-500 text-sm">
+                {label}
+            </div>
+        </div>
+    );
+}
 
-
-export default function HomeTest({image, before, after, averageRating, totalReviews}) {
+export default function HomeTest({ image, before, after, averageRating, totalReviews }) {
     const [clip, setClip] = useState(50);
-    const [carClass, setCarClass] = useState(1);
-    const [pack, setPack] = useState(14900);
-    const [formData, setFormData] = useState({
-        name: '',
-        phone: '',
-        message: ''
-    });
-    const [formStatus, setFormStatus] = useState('');
-    const [menuOpen, setMenuOpen] = useState(false);
-
-    const calcResult = Math.round(pack * carClass / 100) * 100;
 
     const handleRange = (e) => setClip(Number(e.target.value));
 
-    const submitForm = (e) => {
-        e.preventDefault();
-        setFormStatus('Отправляем...');
-        setTimeout(() => {
-            setFormStatus('Спасибо! Мы свяжемся с вами.');
-            setFormData({name: '', phone: '', message: ''});
-        }, 900);
-    };
-    const servicesRef = useRef(null);
-    const pricingRef = useRef(null);
-    const galleryRef = useRef(null);
-    const contactRef = useRef(null);
-
-    const scrollToSection = (ref) => {
-        ref.current?.scrollIntoView({behavior: 'smooth'});
-    };
     const scrollToId = (id) => {
         const tryScroll = () => {
             const el = document.getElementById(id);
             if (el) {
-                el.scrollIntoView({behavior: 'smooth'});
+                el.scrollIntoView({ behavior: 'smooth' });
             } else {
-                // повтор через 50ms, пока элемент не появится
                 setTimeout(tryScroll, 50);
             }
         };
@@ -56,67 +40,78 @@ export default function HomeTest({image, before, after, averageRating, totalRevi
     };
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
         <div className="relative text-[#eaf2fb] font-sans min-h-screen overflow-x-hidden scroll-smooth">
+            <Head>
+                <title>Prime Detail — детейлинг и полировка авто в Кишинёве</title>
+                <meta name="description" content="Профессиональная полировка, керамика и защита кузова в Кишинёве. Prime Detail — премиальный детейлинг с гарантией до 24 месяцев." />
+                <meta name="keywords" content="полировка авто, детейлинг, керамика, PPF, Кишинёв, Prime Detail" />
+                <meta property="og:title" content="Prime Detail — детейлинг и полировка авто" />
+                <meta property="og:description" content="Премиальная полировка, керамическая защита и бронеплёнка в Кишинёве." />
+                <meta property="og:type" content="website" />
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+                <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+                {image && <link rel="preload" as="image" href={image} fetchPriority="high" />}
+            </Head>
 
-            {/* Добавляем после основного градиента */}
             <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-                {/* Основной градиент */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#05080c] to-[#0b1220]"/>
-
-                {/* Слой с мягким шумом (имитация лака) */}
-                <div className="absolute inset-0 opacity-15 mix-blend-overlay"/>
-
-                {/* Анимированный блик полировки */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-polishMove"/>
+                <div className="absolute inset-0 bg-gradient-to-b from-[#05080c] to-[#0b1220]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-polish-shine" />
             </div>
-            {/* HEADER */}
-            <Header scrollToId={scrollToId}/>
+
+            <Header scrollToId={scrollToId} />
 
             <a
-                href="#contact"
-                className="fixed bottom-6 right-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-6 py-3 rounded-full shadow-lg hover:scale-105 transition z-50"
+                href="#Контакты"
+                className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2.5 sm:px-6 sm:py-3 text-sm sm:text-base rounded-full shadow-lg hover:scale-105 transition z-50 mb-[env(safe-area-inset-bottom)]"
             >
                 Записаться
             </a>
 
-            <Hero image={image} averageRating={averageRating} totalReviews={totalReviews}/>
+            <Hero image={image} averageRating={averageRating} totalReviews={totalReviews} />
 
-            <div id="Услуги" className="container mx-auto py-14">
-                <ServiceCardsDetailed/>
+            <div id="Услуги" className="container mx-auto content-auto">
+                <ServiceCardsDetailed />
             </div>
 
-            <BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange}/>
+            <BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange} />
 
-            <section id="Галерея" className="mx-auto py-14 max-w-6xl">
-                <Gallery />
+            <SaleReady360 scrollToId={scrollToId} />
+
+            <section id="Галерея" className="mx-auto py-10 sm:py-14 max-w-6xl content-auto">
+                <LazySection minHeight="20rem">
+                    <Suspense fallback={<SectionFallback label="Загрузка галереи..." />}>
+                        <Gallery />
+                    </Suspense>
+                </LazySection>
             </section>
 
-            <section id="Отзывы" className="container mx-auto py-14 max-w-6xl">
-                <Reviews/>
+            <section id="Отзывы" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">
+                <LazySection minHeight="16rem">
+                    <Suspense fallback={<SectionFallback label="Загрузка отзывов..." />}>
+                        <Reviews />
+                    </Suspense>
+                </LazySection>
             </section>
 
-            <section ref={pricingRef} id="Цены" className="container mx-auto py-14 max-w-6xl ">
-                <Pricing
-                    carClass={carClass}
-                    setCarClass={setCarClass}
-                    pack={pack}
-                    setPack={setPack}
-                    calcResult={calcResult}
-                    scrollToId={scrollToId}
-                />
+            <section id="Цены" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">
+                <LazySection minHeight="18rem">
+                    <Suspense fallback={<SectionFallback label="Загрузка цен..." />}>
+                        <Pricing scrollToId={scrollToId} />
+                    </Suspense>
+                </LazySection>
             </section>
 
-
-            <section ref={contactRef} id="Контакты" className="container mx-auto py-14 max-w-6xl">
-                <Contact/>
+            <section id="Контакты" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">
+                <LazySection minHeight="20rem">
+                    <Suspense fallback={<SectionFallback label="Загрузка контактов..." />}>
+                        <Contact />
+                    </Suspense>
+                </LazySection>
             </section>
 
-            {/* FOOTER */}
-            <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9]">
+            <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9] text-sm sm:text-base">
                 © 2026 Prime Detail
             </footer>
         </div>
-        </Suspense>
     );
 }

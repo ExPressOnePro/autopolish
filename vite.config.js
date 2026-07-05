@@ -10,4 +10,23 @@ export default defineConfig({
         }),
         react(),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks(id) {
+                    if (id.includes('node_modules')) {
+                        if (id.includes('react') || id.includes('scheduler')) {
+                            return 'vendor-react';
+                        }
+                        if (id.includes('@inertiajs')) {
+                            return 'vendor-inertia';
+                        }
+                        return 'vendor';
+                    }
+                },
+            },
+        },
+        cssMinify: true,
+        chunkSizeWarningLimit: 600,
+    },
 });

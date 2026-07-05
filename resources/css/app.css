@@ -2,14 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
 
-body {
-    background-attachment: fixed;
-    transition: background-position 0.2s ease-out;
+    img,
+    video {
+        max-width: 100%;
+        height: auto;
+    }
 }
 
-body:hover {
-    background-position: 100px 0;
+@layer utilities {
+    .content-auto {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 500px;
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
 }
 
-
+@layer components {
+    .section-title {
+        @apply text-2xl sm:text-3xl font-semibold text-white;
+    }
+}

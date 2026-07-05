@@ -22,14 +22,10 @@ use Inertia\Inertia;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/gallery', [LandingController::class, 'gallery']);
-Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
-Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
-
-
-Route::post('lead/send', [LeadController::class, 'sendLead']);
-
-Route::post('/reviews', [ReviewController::class, 'submit']);
+Route::post('/reviews', [ReviewController::class, 'submit'])->name('reviews.store');
 Route::get('/reviews', [ReviewController::class, 'list']);
+Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+Route::post('lead/send', [LeadController::class, 'sendLead']);
 //Route::get('/', function () {
 //    return Inertia::render('Welcome', [
 //        'canLogin' => Route::has('login'),

@@ -15,6 +15,15 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            keyframes: {
+                'polish-shine': {
+                    '0%': { transform: 'translateX(-120%) skewX(-12deg)' },
+                    '100%': { transform: 'translateX(220%) skewX(-12deg)' },
+                },
+            },
+            animation: {
+                'polish-shine': 'polish-shine 10s linear infinite',
+            },
         },
     },
 

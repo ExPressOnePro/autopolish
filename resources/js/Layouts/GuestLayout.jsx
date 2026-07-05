@@ -2,8 +2,8 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Guest({ children }) {
-    const siteTitle = "Professional Car Polishing | Avtopolirovka.md";
-    const description = "Premium car detailing, polishing, and protection services in Chisinau. Quality guaranteed.";
+    const siteTitle = "Prime Detail — детейлинг и полировка авто в Кишинёве";
+    const description = "Премиальная полировка, керамическая защита и бронеплёнка в Кишинёве. Гарантия до 24 месяцев.";
     const keywords = "car detailing, polishing, ceramic coating, Chisinau, auto care";
     const ogImage = "/preview.jpg";
 

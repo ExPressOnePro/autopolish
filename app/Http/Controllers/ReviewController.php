@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ReviewController extends Controller
 {
@@ -35,6 +36,8 @@ class ReviewController extends Controller
             'ip' => $userIp,
         ]);
 
+        Cache::forget('landing.review_stats');
+
         return response()->json([
             'status' => 'success',
             'review' => $review
@@ -45,4 +48,5 @@ class ReviewController extends Controller
     public function list()
     {
         return Review::orderByDesc('created_at')->take(10)->get();
-    }}
+    }
+}

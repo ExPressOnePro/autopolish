@@ -59,10 +59,10 @@ export default function Pricing({ scrollToId }) {
     ];
 
     return (
-        <section className="container mx-auto py-20 px-4">
-            <div className="text-center mb-14">
-                <h2 className="text-4xl font-bold text-white mb-3">Пакеты услуг</h2>
-                <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <section className="container mx-auto py-12 sm:py-20 px-4">
+            <div className="text-center mb-10 sm:mb-14">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Пакеты услуг</h2>
+                <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
                     Выберите подходящий вариант — от лёгкого обновления до полной подготовки автомобиля.
                 </p>
                 <span className="inline-block mt-4 px-3 py-1 text-xs text-[#22d3ee] border border-[#22d3ee] rounded-full">
@@ -70,12 +70,12 @@ export default function Pricing({ scrollToId }) {
                 </span>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 items-stretch">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
                 {packages.map((pkg, i) => (
                     <div
                         key={i}
-                        className={`bg-[#0c1826] border border-[#1b3247] rounded-2xl p-8 shadow-md flex flex-col justify-between relative transition-all duration-300 hover:scale-[1.02] ${
-                            pkg.highlight ? "md:scale-105 z-10" : ""
+                        className={`bg-[#0c1826] border border-[#1b3247] rounded-2xl p-6 sm:p-8 shadow-md flex flex-col justify-between relative transition-all duration-300 hover:scale-[1.01] ${
+                            pkg.highlight ? "lg:scale-105 z-10 ring-1 ring-green-500/30" : ""
                         }`}
                         style={pkg.style}
                     >
@@ -127,7 +127,7 @@ export default function Pricing({ scrollToId }) {
                         </div>
 
                         <button
-                            onClick={() => scrollToId?.("contact")}
+                            onClick={() => scrollToId?.('Контакты')}
                             className={`mt-auto py-2 rounded-xl shadow transition-all ${
                                 pkg.highlight
                                     ? "bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:opacity-90"
