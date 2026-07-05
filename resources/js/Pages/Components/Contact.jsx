@@ -1,24 +1,20 @@
 import { useState } from 'react';
 import axiosInstance from '@/Pages/axiosInstance.js';
-
-const phone = '+373 69 204 272';
-const phoneLink = '37369204272';
+import { site } from '@/config/site';
 
 const place = {
-    name: 'Полировка автомобилей',
-    address: 'Strada Codrilor 8/5, Chișinău, Moldova',
-    lat: 47.0374211,
-    lng: 28.7615023,
+    name: site.legalName,
+    address: site.address.full,
+    lat: site.geo.lat,
+    lng: site.geo.lng,
 };
 
-// Точка из Google Maps: https://www.google.com/maps/place/Полировка+автомобилей/...
 const mapsPlaceUrl =
     'https://www.google.com/maps/place/%D0%9F%D0%BE%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0+%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9/@47.0374211,28.7615023,17z';
 
 const mapsDirections =
     `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}&travelmode=driving`;
 
-// embed с привязкой к бизнес-метке Google (place id 0x40cbd7007acefa6f:0xca8f2c22dc797176)
 const mapsEmbed =
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2720.06!2d28.758927!3d47.0374211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cbd7007acefa6f%3A0xca8f2c22dc797176!2z0J_QvtC70LjRgNC-0LLQutCwINCw0LLRgtC-0LzQvtCx0LjQu9C10Lk!5e0!3m2!1sru!2smd!4v1740000000000!5m2!1sru!2smd';
 
@@ -58,7 +54,7 @@ export default function Contact() {
             }
         } catch (err) {
             console.error(err);
-            setStatusMsg('Ошибка сети. Позвоните нам напрямую.');
+            setStatusMsg('Ошибка сети. Позвоните: ' + site.phone);
         }
     };
 
@@ -68,39 +64,42 @@ export default function Contact() {
                 <div className="text-center mb-8">
                     <h2 className="text-2xl sm:text-3xl font-bold text-white">Контакты</h2>
                     <p className="mt-2 text-gray-400 text-sm sm:text-base">
-                        Позвоните, напишите или оставьте заявку
+                        Полировка авто в Кишинёве — звоните или пишите
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                     <a
-                        href={`tel:${phone}`}
-                        className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition"
+                        href={`tel:${site.phone}`}
+                        className="flex flex-col items-center justify-center gap-1 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition"
                     >
-                        Позвонить
+                        <span>Позвонить</span>
+                        <span className="text-xs opacity-90">{site.phone}</span>
                     </a>
                     <a
-                        href={`https://wa.me/${phoneLink}`}
+                        href={site.whatsapp}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-green-600 hover:bg-green-700 text-white text-sm font-medium transition"
+                        className="flex flex-col items-center justify-center gap-1 py-3 px-4 rounded-xl bg-green-600 hover:bg-green-700 text-white text-sm font-medium transition"
                     >
-                        WhatsApp
+                        <span>WhatsApp</span>
+                        <span className="text-xs opacity-90">{site.phone}</span>
                     </a>
                     <a
-                        href="https://t.me/prime_detail"
+                        href={site.telegram}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#0c1826] border border-[#1b3247] hover:border-blue-500 text-white text-sm font-medium transition"
+                        className="flex flex-col items-center justify-center gap-1 py-3 px-4 rounded-xl bg-[#0c1826] border border-[#1b3247] hover:border-blue-500 text-white text-sm font-medium transition"
                     >
-                        Telegram
+                        <span>Telegram</span>
+                        <span className="text-xs opacity-90">{site.phone}</span>
                     </a>
                 </div>
 
                 <div className="mb-6 p-4 rounded-xl bg-[#0c1826] border border-[#1b3247] text-center">
                     <p className="text-white font-medium">{place.name}</p>
                     <p className="text-gray-300 text-sm mt-1">{place.address}</p>
-                    <p className="text-gray-400 text-sm mt-2">{phone} · Пн–Сб, 9:00–19:00</p>
+                    <p className="text-gray-400 text-sm mt-2">{site.hours}</p>
                     <div className="flex flex-col sm:flex-row gap-2 justify-center mt-4">
                         <a
                             href={mapsDirections}
@@ -116,7 +115,7 @@ export default function Contact() {
                             rel="noreferrer"
                             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#101f30] border border-[#1b3247] hover:border-blue-500 text-blue-400 text-sm font-medium transition"
                         >
-                            Открыть на карте
+                            Google Maps
                         </a>
                     </div>
                 </div>
@@ -134,7 +133,7 @@ export default function Contact() {
                     />
                     <input
                         type="tel"
-                        placeholder="Телефон *"
+                        placeholder={`Телефон * (например ${site.phone})`}
                         value={phoneValue}
                         onChange={(e) => setPhoneValue(e.target.value)}
                         required

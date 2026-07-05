@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
-Sitemap: https://avtopolirovka.md/sitemap.xml
+
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /login
+Disallow: /register
+
+Sitemap: https://autopolish.test/sitemap.xml

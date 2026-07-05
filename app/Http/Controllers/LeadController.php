@@ -34,6 +34,8 @@ class LeadController extends Controller
         if ($request->message) {
             $text .= "Сообщение: {$request->message}";
         }
+        $text .= "\n\n📍 " . config('site.address.full');
+        $text .= "\n☎ " . config('site.phone');
 
         Lead::create([
             'name' => $request->name,

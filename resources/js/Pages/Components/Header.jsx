@@ -1,74 +1,81 @@
-import { useState } from "react";
+import { useState } from 'react';
+import Logo from '@/Components/Logo';
+import { site } from '@/config/site';
 
 export default function Header({ scrollToId }) {
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const contacts = {
-        phone: "+373 69 204 272",
-        whatsapp: "+373 69 204 272",
+    const navItems = ['Услуги', 'Продажа', 'Цены', 'Галерея', 'Отзывы', 'Контакты'];
+
+    const goHome = (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     return (
         <header className="sticky top-0 z-50 bg-[rgba(7,12,18,.95)] backdrop-blur-md border-b border-[#142234]">
-            <div className="container mx-auto flex justify-between items-center h-16 px-5">
-                {/* Логотип */}
-                <a href="#" className="flex items-center gap-2 font-bold min-w-0">
-                    <span className="w-8 h-8 shrink-0 rounded-lg bg-gradient-to-br from-[#0ea5e9] to-[#22d3ee] grid place-items-center shadow-md">
-                        <svg viewBox="0 0 24 24" className="w-4 h-4 fill-white">
-                            <path d="M3 12l4.5 5L21 4.5l-1.6-1.6L7.5 14 4.6 11.1 3 12z"/>
-                        </svg>
-                    </span>
-                    Prime Detail
-                    <span className="hidden sm:inline ml-2 px-2 py-1 text-xs border rounded-full text-[#9bb3c9] bg-[#0c1826] border-[#1e3146]">
-                        детейлинг студия
-                    </span>
+            <div className="container mx-auto flex justify-between items-center h-16 px-4 sm:px-5">
+                <a
+                    href="/"
+                    onClick={goHome}
+                    className="flex items-center shrink-0 max-w-[160px] sm:max-w-[180px]"
+                    aria-label={site.logoAlt}
+                >
+                    <Logo className="h-10 sm:h-11 w-full object-contain object-left" />
                 </a>
 
-                {/* Навигация для desktop */}
-                <nav className="hidden md:flex gap-6 items-center">
-                    {['Услуги', 'Продажа', 'Цены', 'Галерея', 'Отзывы', 'Контакты'].map((id) => (
+                <nav className="hidden lg:flex gap-5 items-center" aria-label="Основное меню">
+                    {navItems.map((id) => (
                         <button
                             key={id}
                             onClick={() => scrollToId(id)}
-                            className="text-gray-200 hover:text-white transition"
+                            className="text-gray-200 hover:text-white transition text-sm"
                         >
                             {id}
                         </button>
                     ))}
                     <a
-                        href={`tel:${contacts.phone}`}
-                        className="ml-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                        href={`tel:${site.phone}`}
+                        className="ml-2 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm whitespace-nowrap"
                     >
-                        Позвонить
+                        {site.phone}
                     </a>
                     <a
-                        href={`https://wa.me/${contacts.whatsapp.replace(/\D/g,'')}`}
+                        href={site.whatsapp}
                         target="_blank"
-                        className="ml-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                        rel="noreferrer"
+                        className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm"
                     >
                         WhatsApp
                     </a>
+                    <a
+                        href={site.telegram}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-3 py-2 bg-[#0c1826] border border-[#1b3247] hover:border-blue-500 text-white rounded-lg transition text-sm"
+                    >
+                        Telegram
+                    </a>
                     <button
                         onClick={() => scrollToId('Контакты')}
-                        className="ml-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:opacity-90 transition"
+                        className="px-3 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg hover:opacity-90 transition text-sm"
                     >
                         Записаться
                     </button>
                 </nav>
 
-                {/* Кнопка мобильного меню */}
                 <button
-                    className="md:hidden text-2xl text-white"
+                    className="lg:hidden text-2xl text-white p-2"
                     onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
                 >
                     {menuOpen ? '✕' : '☰'}
                 </button>
             </div>
 
-            {/* Мобильное меню */}
             {menuOpen && (
-                <nav className="md:hidden bg-[#0c1826] border-t border-[#1b3247] text-center py-4 flex flex-col gap-2">
-                    {['Услуги', 'Продажа', 'Цены', 'Галерея', 'Отзывы', 'Контакты'].map((id) => (
+                <nav className="lg:hidden bg-[#0c1826] border-t border-[#1b3247] text-center py-4 flex flex-col gap-2" aria-label="Мобильное меню">
+                    {navItems.map((id) => (
                         <button
                             key={id}
                             className="block py-2 text-lg text-white hover:text-blue-400 transition"
@@ -80,25 +87,21 @@ export default function Header({ scrollToId }) {
                             {id}
                         </button>
                     ))}
-                    <a
-                        href={`tel:${contacts.phone}`}
-                        className="block py-2 text-lg text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition"
-                    >
-                        Позвонить
+                    <a href={`tel:${site.phone}`} className="block py-2 text-lg text-white bg-blue-600 rounded-lg mx-4">
+                        {site.phone}
                     </a>
-                    <a
-                        href={`https://wa.me/${contacts.whatsapp.replace(/\D/g,'')}`}
-                        target="_blank"
-                        className="block py-2 text-lg text-white bg-green-500 rounded-lg hover:bg-green-600 transition"
-                    >
+                    <a href={site.whatsapp} target="_blank" rel="noreferrer" className="block py-2 text-lg text-white bg-green-600 rounded-lg mx-4">
                         WhatsApp
+                    </a>
+                    <a href={site.telegram} target="_blank" rel="noreferrer" className="block py-2 text-lg text-white bg-[#101f30] border border-[#1b3247] rounded-lg mx-4">
+                        Telegram
                     </a>
                     <button
                         onClick={() => {
                             setMenuOpen(false);
                             scrollToId('Контакты');
                         }}
-                        className="block py-2 mt-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg"
+                        className="block py-2 mt-2 mx-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-lg"
                     >
                         Записаться
                     </button>

@@ -1,12 +1,14 @@
 import React, { lazy, Suspense, useState } from 'react';
-import { Head } from '@inertiajs/react';
 import BeforeAfter from '@/Pages/Components/BeforeAfter.jsx';
 import Hero from '@/Pages/Components/Hero.jsx';
 import SaleReady360 from '@/Pages/Components/SaleReady360.jsx';
 import ServiceCardsDetailed from '@/Pages/Components/ServiceCardsDetailed.jsx';
 import Header from '@/Pages/Components/Header.jsx';
 import Reviews from '@/Pages/Components/Reviews.jsx';
+import SeoHead from '@/Components/SeoHead.jsx';
 import LazySection from '@/Components/LazySection.jsx';
+import Logo from '@/Components/Logo.jsx';
+import { site } from '@/config/site';
 
 const Gallery = lazy(() => import('@/Pages/Components/Gallery'));
 const Pricing = lazy(() => import('@/Pages/Components/Pricing'));
@@ -22,7 +24,7 @@ function SectionFallback({ label }) {
     );
 }
 
-export default function HomeTest({ image, before, after, averageRating, totalReviews, reviews = [] }) {
+export default function HomeTest({ image, before, after, averageRating, totalReviews, reviews = [], siteUrl }) {
     const [clip, setClip] = useState(50);
 
     const handleRange = (e) => setClip(Number(e.target.value));
@@ -41,17 +43,12 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
 
     return (
         <div className="relative text-[#eaf2fb] font-sans min-h-screen overflow-x-hidden scroll-smooth">
-            <Head>
-                <title>Prime Detail — детейлинг и полировка авто в Кишинёве</title>
-                <meta name="description" content="Профессиональная полировка, керамика и защита кузова в Кишинёве. Prime Detail — премиальный детейлинг с гарантией до 24 месяцев." />
-                <meta name="keywords" content="полировка авто, детейлинг, керамика, PPF, Кишинёв, Prime Detail" />
-                <meta property="og:title" content="Prime Detail — детейлинг и полировка авто" />
-                <meta property="og:description" content="Премиальная полировка, керамическая защита и бронеплёнка в Кишинёве." />
-                <meta property="og:type" content="website" />
-                <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-                <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
-                {image && <link rel="preload" as="image" href={image} fetchPriority="high" />}
-            </Head>
+            <SeoHead
+                url={siteUrl}
+                image={image}
+                averageRating={averageRating}
+                totalReviews={totalReviews}
+            />
 
             <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-b from-[#05080c] to-[#0b1220]" />
@@ -109,8 +106,11 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
                 </LazySection>
             </section>
 
-            <footer className="bg-[#0c1826] py-6 text-center text-[#9bb3c9] text-sm sm:text-base">
-                © 2026 Prime Detail
+            <footer className="bg-[#0c1826] py-8 text-center text-[#9bb3c9] text-sm sm:text-base">
+                <div className="flex justify-center mb-4">
+                    <Logo className="h-12 w-auto object-contain opacity-90" />
+                </div>
+                <p>© 2026 {site.name} · {site.address.city} · {site.phone}</p>
             </footer>
         </div>
     );

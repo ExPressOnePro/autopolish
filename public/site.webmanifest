@@ -1,1 +1,14 @@
-{"name":"","short_name":"","icons":[{"src":"\/android-chrome-192x192.png","sizes":"192x192","type":"image\/png"},{"src":"\/apple-touch-icon.png","sizes":"180x180","type":"image\/png"},{"src":"\/favicon-16x16.png","sizes":"16x16","type":"image\/png"},{"src":"\/favicon-32x32.png","sizes":"32x32","type":"image\/png"},{"src":"\/favicon.ico","sizes":"48x48","type":"image\/x-icon"}]}
+{
+    "name": "Auto Polishing — Prime Detail",
+    "short_name": "Auto Polish",
+    "description": "Полировка и детейлинг авто в Кишинёве",
+    "icons": [
+        {"src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png"},
+        {"src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},
+        {"src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
+        {"src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
+        {"src": "/images/logo.png", "sizes": "328x328", "type": "image/png"}
+    ],
+    "theme_color": "#050714",
+    "background_color": "#050714"
+}

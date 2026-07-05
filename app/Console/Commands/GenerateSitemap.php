@@ -8,32 +8,41 @@ use Spatie\Sitemap\Tags\Url;
 
 class GenerateSitemap extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'app:generate-sitemap';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
+    protected $description = 'Generate sitemap.xml and robots.txt for SEO';
 
-    /**
-     * Execute the console command.
-     */
-    public function handle()
+    public function handle(): int
     {
+        $base = rtrim(config('app.url'), '/');
+
         Sitemap::create()
-            ->add(Url::create('/'))
-            ->add(Url::create('/about'))
-            ->add(Url::create('/services'))
-            ->add(Url::create('/contact'))
+            ->add(
+                Url::create('/')
+                    ->setPriority(1.0)
+                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+                    ->setLastModificationDate(now())
+            )
             ->writeToFile(public_path('sitemap.xml'));
 
-        $this->info('✅ Sitemap successfully generated at public/sitemap.xml');
+        $robots = implode("\n", [
+            'User-agent: *',
+            'Allow: /',
+            '',
+            'Disallow: /dashboard',
+            'Disallow: /profile',
+            'Disallow: /login',
+            'Disallow: /register',
+            '',
+            "Sitemap: {$base}/sitemap.xml",
+            '',
+        ]);
+
+        file_put_contents(public_path('robots.txt'), $robots);
+
+        $this->info("Sitemap: {$base}/sitemap.xml");
+        $this->info('robots.txt updated');
+
+        return self::SUCCESS;
     }
 }
