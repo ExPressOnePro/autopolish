@@ -160,7 +160,7 @@
     ]
   },
   "resources/js/Pages/Components/Contact.jsx": {
-    "file": "assets/Contact-B5Zyem27.js",
+    "file": "assets/Contact-DNbH0vMN.js",
     "name": "Contact",
     "src": "resources/js/Pages/Components/Contact.jsx",
     "isDynamicEntry": true,
@@ -231,15 +231,15 @@
     ]
   },
   "resources/js/Pages/Components/Reviews.jsx": {
-    "file": "assets/Reviews-C2RXU9Ci.js",
+    "file": "assets/Reviews-CZePWcNM.js",
     "name": "Reviews",
     "src": "resources/js/Pages/Components/Reviews.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-react-DLtBmWsw.js",
-      "_vendor-DeS2-32b.js",
       "_axiosInstance-Bm8HXz3v.js",
-      "_vendor-inertia-BI7mxU6z.js"
+      "_vendor-inertia-BI7mxU6z.js",
+      "_vendor-DeS2-32b.js"
     ]
   },
   "resources/js/Pages/Components/SaleReady360.jsx": {
@@ -289,7 +289,7 @@
     ]
   },
   "resources/js/Pages/HomeTest.jsx": {
-    "file": "assets/HomeTest-CWHKULxO.js",
+    "file": "assets/HomeTest-X7cB2hzm.js",
     "name": "HomeTest",
     "src": "resources/js/Pages/HomeTest.jsx",
     "isDynamicEntry": true,
@@ -301,13 +301,14 @@
       "resources/js/Pages/Components/SaleReady360.jsx",
       "resources/js/Pages/Components/ServiceCardsDetailed.jsx",
       "resources/js/Pages/Components/Header.jsx",
+      "resources/js/Pages/Components/Reviews.jsx",
       "_vendor-DeS2-32b.js",
       "_vendor-inertia-BI7mxU6z.js",
-      "_OptimizedImage-hq0Qouv_.js"
+      "_OptimizedImage-hq0Qouv_.js",
+      "_axiosInstance-Bm8HXz3v.js"
     ],
     "dynamicImports": [
       "resources/js/Pages/Components/Gallery.jsx",
-      "resources/js/Pages/Components/Reviews.jsx",
       "resources/js/Pages/Components/Pricing.jsx",
       "resources/js/Pages/Components/Contact.jsx"
     ]
@@ -371,7 +372,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-B0rwriTN.js",
+    "file": "assets/app-JSZdtMjc.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -406,7 +407,7 @@
       "resources/js/Pages/Profile/Partials/UpdateProfileInformationForm.jsx"
     ],
     "css": [
-      "assets/app-hRHOzfMS.css"
+      "assets/app-rrlNlFHN.css"
     ]
   }
 }

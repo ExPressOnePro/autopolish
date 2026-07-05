@@ -3,11 +3,24 @@ import axiosInstance from '@/Pages/axiosInstance.js';
 
 const phone = '+373 69 204 272';
 const phoneLink = '37369204272';
-const address = 'Str. Codrilor 8/5, Chișinău, Moldova';
-const addressShort = 'str. Codrilor 8/5, Chișinău';
-const mapsQuery = encodeURIComponent('Strada Codrilor 8/5, Chișinău, Moldova');
-const mapsEmbed = `https://maps.google.com/maps?q=${mapsQuery}&hl=ru&z=16&ie=UTF8&iwloc=&output=embed`;
-const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
+
+const place = {
+    name: 'Полировка автомобилей',
+    address: 'Strada Codrilor 8/5, Chișinău, Moldova',
+    lat: 47.0374211,
+    lng: 28.7615023,
+};
+
+// Точка из Google Maps: https://www.google.com/maps/place/Полировка+автомобилей/...
+const mapsPlaceUrl =
+    'https://www.google.com/maps/place/%D0%9F%D0%BE%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0+%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D0%B5%D0%B9/@47.0374211,28.7615023,17z';
+
+const mapsDirections =
+    `https://www.google.com/maps/dir/?api=1&destination=${place.lat},${place.lng}&travelmode=driving`;
+
+// embed с привязкой к бизнес-метке Google (place id 0x40cbd7007acefa6f:0xca8f2c22dc797176)
+const mapsEmbed =
+    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2720.06!2d28.758927!3d47.0374211!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40cbd7007acefa6f%3A0xca8f2c22dc797176!2z0J_QvtC70LjRgNC-0LLQutCwINCw0LLRgtC-0LzQvtCx0LjQu9C10Lk!5e0!3m2!1sru!2smd!4v1740000000000!5m2!1sru!2smd';
 
 export default function Contact() {
     const [statusMsg, setStatusMsg] = useState('');
@@ -85,16 +98,27 @@ export default function Contact() {
                 </div>
 
                 <div className="mb-6 p-4 rounded-xl bg-[#0c1826] border border-[#1b3247] text-center">
-                    <p className="text-white font-medium">{addressShort}</p>
-                    <p className="text-gray-400 text-sm mt-1">{phone} · Пн–Сб, 9:00–19:00</p>
-                    <a
-                        href={mapsDirections}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center justify-center gap-2 mt-4 px-5 py-2.5 rounded-xl bg-[#101f30] border border-[#1b3247] hover:border-blue-500 text-blue-400 text-sm font-medium transition"
-                    >
-                        Проложить маршрут
-                    </a>
+                    <p className="text-white font-medium">{place.name}</p>
+                    <p className="text-gray-300 text-sm mt-1">{place.address}</p>
+                    <p className="text-gray-400 text-sm mt-2">{phone} · Пн–Сб, 9:00–19:00</p>
+                    <div className="flex flex-col sm:flex-row gap-2 justify-center mt-4">
+                        <a
+                            href={mapsDirections}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition"
+                        >
+                            Проложить маршрут
+                        </a>
+                        <a
+                            href={mapsPlaceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#101f30] border border-[#1b3247] hover:border-blue-500 text-blue-400 text-sm font-medium transition"
+                        >
+                            Открыть на карте
+                        </a>
+                    </div>
                 </div>
 
                 <form
@@ -146,7 +170,7 @@ export default function Contact() {
                     )}
                 </form>
 
-                <div className="mt-6 rounded-xl overflow-hidden border border-[#1b3247] h-48 sm:h-56">
+                <div className="mt-6 rounded-xl overflow-hidden border border-[#1b3247] h-56 sm:h-72">
                     <iframe
                         src={mapsEmbed}
                         width="100%"
@@ -155,7 +179,7 @@ export default function Contact() {
                         allowFullScreen
                         loading="lazy"
                         referrerPolicy="no-referrer-when-downgrade"
-                        title={address}
+                        title={`${place.name} — ${place.address}`}
                     />
                 </div>
             </div>

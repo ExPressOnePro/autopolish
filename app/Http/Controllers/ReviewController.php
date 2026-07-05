@@ -47,6 +47,6 @@ class ReviewController extends Controller
 
     public function list()
     {
-        return Review::orderByDesc('created_at')->take(10)->get();
+        return Review::orderByDesc('created_at')->take(20)->get();
     }
 }

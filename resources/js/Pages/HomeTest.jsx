@@ -5,10 +5,10 @@ import Hero from '@/Pages/Components/Hero.jsx';
 import SaleReady360 from '@/Pages/Components/SaleReady360.jsx';
 import ServiceCardsDetailed from '@/Pages/Components/ServiceCardsDetailed.jsx';
 import Header from '@/Pages/Components/Header.jsx';
+import Reviews from '@/Pages/Components/Reviews.jsx';
 import LazySection from '@/Components/LazySection.jsx';
 
 const Gallery = lazy(() => import('@/Pages/Components/Gallery'));
-const Reviews = lazy(() => import('@/Pages/Components/Reviews'));
 const Pricing = lazy(() => import('@/Pages/Components/Pricing'));
 const Contact = lazy(() => import('@/Pages/Components/Contact'));
 
@@ -22,7 +22,7 @@ function SectionFallback({ label }) {
     );
 }
 
-export default function HomeTest({ image, before, after, averageRating, totalReviews }) {
+export default function HomeTest({ image, before, after, averageRating, totalReviews, reviews = [] }) {
     const [clip, setClip] = useState(50);
 
     const handleRange = (e) => setClip(Number(e.target.value));
@@ -86,11 +86,11 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
             </section>
 
             <section id="Отзывы" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">
-                <LazySection minHeight="16rem">
-                    <Suspense fallback={<SectionFallback label="Загрузка отзывов..." />}>
-                        <Reviews />
-                    </Suspense>
-                </LazySection>
+                <Reviews
+                    initialReviews={reviews}
+                    averageRating={averageRating}
+                    totalReviews={totalReviews}
+                />
             </section>
 
             <section id="Цены" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">

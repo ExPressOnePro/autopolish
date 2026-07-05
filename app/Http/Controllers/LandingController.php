@@ -21,12 +21,15 @@ class LandingController extends Controller
             ];
         });
 
+        $reviews = Review::orderByDesc('created_at')->take(20)->get();
+
         return Inertia::render('HomeTest', [
             'image' => Storage::url('AutoPolish.jpg'),
             'before' => Storage::url('before2.webp'),
             'after' => Storage::url('after1.webp'),
             'averageRating' => $stats['averageRating'],
             'totalReviews' => $stats['totalReviews'],
+            'reviews' => $reviews,
         ]);
     }
 
