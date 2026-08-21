@@ -104,7 +104,7 @@ export default function SaleReady360({ scrollToId }) {
                     <div className="relative">
                         <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-[#1b3247] shadow-2xl shadow-emerald-500/10">
                             <OptimizedImage
-                                src="/storage/AutoPolish.jpg"
+                                src="/images/AutoPolish.jpg"
                                 alt="Автомобиль после подготовки к продаже"
                                 aspectRatio="4 / 3"
                                 sizes="(max-width: 1024px) 100vw, 50vw"

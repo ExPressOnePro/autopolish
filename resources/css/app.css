@@ -9,19 +9,14 @@
         text-rendering: optimizeLegibility;
     }
 
+    /* Don't force height:auto — breaks object-cover / absolute fill images on iOS */
     img,
     video {
         max-width: 100%;
-        height: auto;
     }
 }
 
 @layer utilities {
-    .content-auto {
-        content-visibility: auto;
-        contain-intrinsic-size: auto 500px;
-    }
-
     .text-balance {
         text-wrap: balance;
     }

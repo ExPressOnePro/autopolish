@@ -1,58 +1,52 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axiosInstance from '@/Pages/axiosInstance.js';
 import OptimizedImage from '@/Components/OptimizedImage';
 
 export default function Gallery() {
     const [gallery, setGallery] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-    const galleryRef = useRef(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        const node = galleryRef.current;
-        if (!node) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { rootMargin: '250px 0px', threshold: 0.1 }
-        );
-
-        observer.observe(node);
-        return () => observer.disconnect();
-    }, []);
-
-    useEffect(() => {
-        if (!isVisible || gallery.length > 0) return;
+        let cancelled = false;
 
         const fetchGallery = async () => {
             setLoading(true);
+            setError('');
             try {
                 const res = await axiosInstance.get('/gallery');
-                setGallery(res.data);
+                if (!cancelled) {
+                    setGallery(Array.isArray(res.data) ? res.data : []);
+                }
             } catch (err) {
                 console.error('Ошибка загрузки галереи:', err);
+                if (!cancelled) {
+                    setError('Не удалось загрузить фото');
+                    // fallback relative paths if API fails
+                    setGallery([
+                        '/images/gallery/002.jpg',
+                        '/images/gallery/003.jpg',
+                        '/images/gallery/cardPolish001.jpg',
+                    ]);
+                }
             } finally {
-                setLoading(false);
+                if (!cancelled) setLoading(false);
             }
         };
 
         fetchGallery();
-    }, [isVisible, gallery.length]);
+        return () => { cancelled = true; };
+    }, []);
 
     return (
-        <div ref={galleryRef} className="mx-auto px-4 max-w-6xl content-auto">
+        <div className="mx-auto px-4 max-w-6xl">
             <h2 className="text-2xl sm:text-3xl mb-6 font-semibold text-center text-white">
                 Галерея работ
             </h2>
 
             {loading ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
-                    {Array(8).fill(0).map((_, i) => (
+                    {Array(6).fill(0).map((_, i) => (
                         <div
                             key={i}
                             className="aspect-[4/3] rounded-lg bg-gray-700/80 animate-pulse"
@@ -60,18 +54,19 @@ export default function Gallery() {
                     ))}
                 </div>
             ) : gallery.length === 0 ? (
-                <p className="text-center text-gray-400 py-8">Фотографии скоро появятся</p>
+                <p className="text-center text-gray-400 py-8">
+                    {error || 'Фотографии скоро появятся'}
+                </p>
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
                     {gallery.map((img, i) => (
                         <OptimizedImage
-                            key={img}
+                            key={`${img}-${i}`}
                             src={img}
                             alt={`Работа Prime Detail ${i + 1}`}
                             aspectRatio="4 / 3"
                             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                            wrapperClassName="rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 group"
-                            className="group-hover:scale-[1.03] transition-transform duration-500"
+                            wrapperClassName="rounded-lg shadow-md"
                         />
                     ))}
                 </div>

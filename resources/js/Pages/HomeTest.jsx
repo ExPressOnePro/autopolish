@@ -6,7 +6,6 @@ import ServiceCardsDetailed from '@/Pages/Components/ServiceCardsDetailed.jsx';
 import Header from '@/Pages/Components/Header.jsx';
 import Reviews from '@/Pages/Components/Reviews.jsx';
 import SeoHead from '@/Components/SeoHead.jsx';
-import LazySection from '@/Components/LazySection.jsx';
 import Logo from '@/Components/Logo.jsx';
 import { site } from '@/config/site';
 
@@ -66,7 +65,7 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
 
             <Hero image={image} averageRating={averageRating} totalReviews={totalReviews} />
 
-            <div id="Услуги" className="container mx-auto content-auto">
+            <div id="Услуги" className="container mx-auto">
                 <ServiceCardsDetailed />
             </div>
 
@@ -74,15 +73,13 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
 
             <SaleReady360 scrollToId={scrollToId} />
 
-            <section id="Галерея" className="mx-auto py-10 sm:py-14 max-w-6xl content-auto">
-                <LazySection minHeight="20rem">
-                    <Suspense fallback={<SectionFallback label="Загрузка галереи..." />}>
-                        <Gallery />
-                    </Suspense>
-                </LazySection>
+            <section id="Галерея" className="mx-auto py-10 sm:py-14 max-w-6xl">
+                <Suspense fallback={<SectionFallback label="Загрузка галереи..." />}>
+                    <Gallery />
+                </Suspense>
             </section>
 
-            <section id="Отзывы" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">
+            <section id="Отзывы" className="container mx-auto py-10 sm:py-14 max-w-6xl">
                 <Reviews
                     initialReviews={reviews}
                     averageRating={averageRating}
@@ -90,20 +87,16 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
                 />
             </section>
 
-            <section id="Цены" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">
-                <LazySection minHeight="18rem">
-                    <Suspense fallback={<SectionFallback label="Загрузка цен..." />}>
-                        <Pricing scrollToId={scrollToId} />
-                    </Suspense>
-                </LazySection>
+            <section id="Цены" className="container mx-auto py-10 sm:py-14 max-w-6xl">
+                <Suspense fallback={<SectionFallback label="Загрузка цен..." />}>
+                    <Pricing scrollToId={scrollToId} />
+                </Suspense>
             </section>
 
-            <section id="Контакты" className="container mx-auto py-10 sm:py-14 max-w-6xl content-auto">
-                <LazySection minHeight="20rem">
-                    <Suspense fallback={<SectionFallback label="Загрузка контактов..." />}>
-                        <Contact />
-                    </Suspense>
-                </LazySection>
+            <section id="Контакты" className="container mx-auto py-10 sm:py-14 max-w-6xl">
+                <Suspense fallback={<SectionFallback label="Загрузка контактов..." />}>
+                    <Contact />
+                </Suspense>
             </section>
 
             <footer className="bg-[#0c1826] py-8 text-center text-[#9bb3c9] text-sm sm:text-base">

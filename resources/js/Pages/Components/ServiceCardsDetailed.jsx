@@ -11,7 +11,7 @@ export default function ServicesFull() {
                 'Восстановление цвета и блеска',
                 'Защита поверхности на 3-6 месяцев',
             ],
-            images: ['/storage/cardPolish001.jpg'],
+            images: ['/images/services/cardPolish001.jpg'],
         },
         {
             title: 'Полировка фар и оптики',
@@ -22,7 +22,7 @@ export default function ServicesFull() {
                 'Восстановление света фар',
                 'Защитное покрытие на 6-12 месяцев',
             ],
-            images: ['/storage/002.jpg'],
+            images: ['/images/services/002.jpg'],
         },
         {
             title: 'Оклейка бронеплёнкой (PPF)',
@@ -33,7 +33,7 @@ export default function ServicesFull() {
                 'Защита от УФ, реагентов и камней',
                 'Долговечность до 7 лет',
             ],
-            images: ['/storage/003.jpg'],
+            images: ['/images/services/003.jpg'],
         },
     ];
 

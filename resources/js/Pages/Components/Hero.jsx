@@ -2,16 +2,16 @@ import OptimizedImage from '@/Components/OptimizedImage';
 
 export default function Hero({ image, averageRating, totalReviews }) {
     return (
-        <section className="relative w-full min-h-[85vh] sm:min-h-[90vh] flex items-center overflow-hidden">
-            <div className="absolute inset-0">
+        <section className="relative w-full min-h-[70vh] sm:min-h-[90vh] flex items-center overflow-hidden">
+            <div className="absolute inset-0 bg-[#060a0f]">
                 {image && (
                     <OptimizedImage
                         src={image}
                         alt="Полировка автомобиля Prime Detail"
                         priority
                         sizes="100vw"
-                        wrapperClassName="h-full w-full"
-                        className="scale-105 object-cover object-center"
+                        wrapperClassName="absolute inset-0 h-full w-full"
+                        className="object-cover object-center"
                     />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-r from-[#060a0f] via-[#060a0fe6] to-[#060a0f66] sm:to-transparent" />

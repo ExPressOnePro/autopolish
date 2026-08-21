@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function OptimizedImage({
     src,
@@ -10,15 +10,31 @@ export default function OptimizedImage({
     sizes = null,
     onLoad,
 }) {
+    const imgRef = useRef(null);
     const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        setLoaded(false);
+        const img = imgRef.current;
+        // Safari/iOS: cached images may already be complete before onLoad binds
+        if (img?.complete && img.naturalWidth > 0) {
+            setLoaded(true);
+        }
+    }, [src]);
 
     const handleLoad = (event) => {
         setLoaded(true);
         onLoad?.(event);
     };
 
+    const handleError = () => {
+        // Don't leave blank forever on mobile if load fails
+        setLoaded(true);
+    };
+
     const img = (
         <img
+            ref={imgRef}
             src={src}
             alt={alt}
             loading={priority ? 'eager' : 'lazy'}
@@ -26,9 +42,11 @@ export default function OptimizedImage({
             fetchPriority={priority ? 'high' : 'auto'}
             sizes={sizes ?? undefined}
             onLoad={handleLoad}
+            onError={handleError}
             className={[
-                'w-full h-full object-cover transition-opacity duration-500',
-                loaded ? 'opacity-100' : 'opacity-0',
+                // absolute fill for hero/covers — avoid global height:auto breaking mobile
+                'absolute inset-0 w-full h-full max-w-none object-cover transition-opacity duration-300',
+                loaded ? 'opacity-100' : 'opacity-100',
                 className,
             ].join(' ')}
         />
@@ -52,7 +70,7 @@ export default function OptimizedImage({
     }
 
     return (
-        <div className={['relative', wrapperClassName].join(' ')}>
+        <div className={['relative overflow-hidden', wrapperClassName].join(' ')}>
             {!loaded && (
                 <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-[#0c1826] to-[#142234]" />
             )}
