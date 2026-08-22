@@ -6,4 +6,4 @@ Disallow: /profile
 Disallow: /login
 Disallow: /register
 
-Sitemap: https://autopolish.test/sitemap.xml
+Sitemap: https://avtopolirovka.md/sitemap.xml
