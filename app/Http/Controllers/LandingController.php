@@ -31,12 +31,12 @@ class LandingController extends Controller
                 ['AutoPolish.jpg']
             ),
             'before' => $this->resolveImage(
-                ['images/before.jpg', 'images/services/cardPolish001.jpg'],
-                ['before2.webp', 'before.jpg', 'cardPolish001.jpg']
+                ['images/before2.webp'],
+                ['before2.webp', 'before.jpg']
             ),
             'after' => $this->resolveImage(
-                ['images/after.jpg', 'images/AutoPolish.jpg'],
-                ['after1.webp', 'after.jpg', 'AutoPolish.jpg']
+                ['images/after1.webp'],
+                ['after1.webp', 'after.jpg']
             ),
             'averageRating' => $stats['averageRating'],
             'totalReviews' => $stats['totalReviews'],
@@ -46,15 +46,11 @@ class LandingController extends Controller
 
     public function gallery(): JsonResponse
     {
-        $gallery = Cache::remember('landing.gallery', 300, function () {
-            $fromPublic = $this->listPublicImages('images/gallery');
-            if ($fromPublic !== []) {
-                return $fromPublic;
-            }
-
-            $fromStorage = $this->listStorageImages('gallery');
-            if ($fromStorage !== []) {
-                return $fromStorage;
+        // v2 — сброс старого кэша с http://.../storage/gallery/pol*.webp
+        $gallery = Cache::remember('landing.gallery.v3', 300, function () {
+            $fromGallery = $this->listPublicImages('images/gallery');
+            if ($fromGallery !== []) {
+                return $fromGallery;
             }
 
             return $this->listPublicImages('images/services');
@@ -77,6 +73,11 @@ class LandingController extends Controller
 
         foreach ($storageCandidates as $path) {
             if (Storage::disk('public')->exists($path)) {
+                $publicFallback = $this->storageToPublicPath($path);
+                if ($publicFallback !== null) {
+                    return $publicFallback;
+                }
+
                 return '/storage/'.ltrim($path, '/');
             }
         }
@@ -116,5 +117,38 @@ class LandingController extends Controller
     private function isImageExt(string $ext): bool
     {
         return in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'webp', 'gif'], true);
+    }
+
+    /** Map legacy storage filenames to public/images when the file was migrated. */
+    private function storageToPublicPath(string $storagePath): ?string
+    {
+        $map = [
+            'AutoPolish.jpg' => 'images/AutoPolish.jpg',
+            'before2.webp' => 'images/before2.webp',
+            'before.jpg' => 'images/before2.webp',
+            'after1.webp' => 'images/after1.webp',
+            'after.jpg' => 'images/after1.webp',
+            'cardPolish001.jpg' => 'images/services/cardPolish001.jpg',
+            'pol1.webp' => 'images/gallery/pol1.png',
+            'pol2.webp' => 'images/gallery/pol2.png',
+            'pol3.webp' => 'images/gallery/pol3.png',
+            'pol4.webp' => 'images/gallery/pol4.png',
+            'pol5.webp' => 'images/gallery/pol5.png',
+            'pol6.webp' => 'images/gallery/pol6.png',
+            'pol7.webp' => 'images/gallery/pol7.png',
+            'pol8.webp' => 'images/gallery/pol8.png',
+        ];
+
+        $filename = basename($storagePath);
+        if (! isset($map[$filename])) {
+            return null;
+        }
+
+        $publicPath = $map[$filename];
+        if (File::exists(public_path($publicPath))) {
+            return '/'.$publicPath;
+        }
+
+        return null;
     }
 }

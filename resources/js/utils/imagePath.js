@@ -1,18 +1,37 @@
 const STORAGE_TO_PUBLIC = {
     'AutoPolish.jpg': '/images/AutoPolish.jpg',
-    'before2.webp': '/images/before.jpg',
-    'before.jpg': '/images/before.jpg',
-    'after1.webp': '/images/after.jpg',
-    'after.jpg': '/images/after.jpg',
+    'before2.webp': '/images/before2.webp',
+    'before.jpg': '/images/before2.webp',
+    'after1.webp': '/images/after1.webp',
+    'after.jpg': '/images/after1.webp',
     'cardPolish001.jpg': '/images/services/cardPolish001.jpg',
-    '002.jpg': '/images/gallery/002.jpg',
-    '003.jpg': '/images/gallery/003.jpg',
+    'pol1.webp': '/images/gallery/pol1.png',
+    'pol2.webp': '/images/gallery/pol2.png',
+    'pol3.webp': '/images/gallery/pol3.png',
+    'pol4.webp': '/images/gallery/pol4.png',
+    'pol5.webp': '/images/gallery/pol5.png',
+    'pol6.webp': '/images/gallery/pol6.png',
+    'pol7.webp': '/images/gallery/pol7.png',
+    'pol8.webp': '/images/gallery/pol8.png',
+    'pol1.png': '/images/gallery/pol1.png',
+    'pol2.png': '/images/gallery/pol2.png',
+    'pol3.png': '/images/gallery/pol3.png',
+    'pol4.png': '/images/gallery/pol4.png',
+    'pol5.png': '/images/gallery/pol5.png',
+    'pol6.png': '/images/gallery/pol6.png',
+    'pol7.png': '/images/gallery/pol7.png',
+    'pol8.png': '/images/gallery/pol8.png',
 };
 
 export const GALLERY_FALLBACKS = [
-    '/images/gallery/002.jpg',
-    '/images/gallery/003.jpg',
-    '/images/gallery/cardPolish001.jpg',
+    '/images/gallery/pol1.png',
+    '/images/gallery/pol2.png',
+    '/images/gallery/pol3.png',
+    '/images/gallery/pol4.png',
+    '/images/gallery/pol5.png',
+    '/images/gallery/pol6.png',
+    '/images/gallery/pol7.png',
+    '/images/gallery/pol8.png',
 ];
 
 /** Convert legacy /storage/ and absolute URLs to /images/ paths. */
@@ -60,17 +79,17 @@ export function getImageFallbacks(path) {
     return [...new Set(fallbacks.filter(Boolean))];
 }
 
-/** Gallery API on old prod returns /storage/ URLs — use known public files instead. */
+/** Normalize gallery API items; map legacy /storage/ names to /images/. */
 export function normalizeGalleryItems(items) {
     if (!Array.isArray(items) || items.length === 0) {
         return GALLERY_FALLBACKS;
     }
 
-    const usesLegacyStorage = items.some((item) => String(item).includes('/storage/'));
-    if (usesLegacyStorage) {
-        return GALLERY_FALLBACKS;
-    }
+    const normalized = items
+        .map(normalizeImagePath)
+        .filter(Boolean);
 
-    const normalized = items.map(normalizeImagePath).filter(Boolean);
-    return normalized.length > 0 ? normalized : GALLERY_FALLBACKS;
+    const unique = [...new Set(normalized)];
+
+    return unique.length > 0 ? unique : GALLERY_FALLBACKS;
 }

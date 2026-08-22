@@ -1,30 +1,55 @@
-import OptimizedImage from '@/Components/OptimizedImage';
+import { useEffect, useRef, useState } from 'react';
 
 export default function BeforeAfter({ before, after, clip, handleRange }) {
+    const containerRef = useRef(null);
+    const [width, setWidth] = useState(0);
+
+    useEffect(() => {
+        const node = containerRef.current;
+        if (!node) {
+            return undefined;
+        }
+
+        const update = () => setWidth(node.offsetWidth);
+        update();
+
+        const observer = new ResizeObserver(update);
+        observer.observe(node);
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <section id="process" className="container mx-auto py-10 sm:py-14 max-w-6xl px-4">
             <h2 className="text-2xl sm:text-3xl mb-4 sm:mb-6 font-semibold text-white text-center sm:text-left">
                 До / После
             </h2>
 
-            <div className="relative rounded-xl sm:rounded-2xl border border-[#1b3247] overflow-hidden shadow-2xl aspect-[4/3] sm:aspect-[16/10] bg-[#0c1826]">
-                <OptimizedImage
-                    src={before}
-                    alt="До полировки"
-                    priority={false}
-                    wrapperClassName="absolute inset-0"
-                    className="object-cover"
+            <div
+                ref={containerRef}
+                className="relative rounded-xl sm:rounded-2xl border border-[#1b3247] overflow-hidden shadow-2xl aspect-[4/3] sm:aspect-[16/10] bg-[#0c1826]"
+            >
+                {/* После — фон на всю область */}
+                <img
+                    src={after}
+                    alt="После полировки"
+                    loading="eager"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover"
                 />
+
+                {/* До — слева, ширина по ползунку */}
                 <div
-                    className="absolute inset-0 overflow-hidden"
-                    style={{ clipPath: `inset(0 0 0 ${clip}%)` }}
+                    className="absolute inset-y-0 left-0 overflow-hidden"
+                    style={{ width: `${clip}%` }}
                 >
-                    <OptimizedImage
-                        src={after}
-                        alt="После полировки"
-                        priority={false}
-                        wrapperClassName="h-full w-full"
-                        className="object-cover"
+                    <img
+                        src={before}
+                        alt="До полировки"
+                        loading="eager"
+                        decoding="async"
+                        className="absolute top-0 left-0 h-full max-w-none object-cover"
+                        style={{ width: width > 0 ? width : '100%' }}
                     />
                 </div>
 
