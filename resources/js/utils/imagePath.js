@@ -1,3 +1,4 @@
+/** Map old /storage/ paths to /images/ (same files, public is source of truth). */
 const STORAGE_TO_PUBLIC = {
     'AutoPolish.jpg': '/images/AutoPolish.jpg',
     'before2.webp': '/images/before2.webp',
@@ -5,6 +6,8 @@ const STORAGE_TO_PUBLIC = {
     'after1.webp': '/images/after1.webp',
     'after.jpg': '/images/after1.webp',
     'cardPolish001.jpg': '/images/services/cardPolish001.jpg',
+    '002.jpg': '/images/services/002.jpg',
+    '003.jpg': '/images/services/003.jpg',
     'pol1.webp': '/images/gallery/pol1.png',
     'pol2.webp': '/images/gallery/pol2.png',
     'pol3.webp': '/images/gallery/pol3.png',
@@ -13,14 +16,6 @@ const STORAGE_TO_PUBLIC = {
     'pol6.webp': '/images/gallery/pol6.png',
     'pol7.webp': '/images/gallery/pol7.png',
     'pol8.webp': '/images/gallery/pol8.png',
-    'pol1.png': '/images/gallery/pol1.png',
-    'pol2.png': '/images/gallery/pol2.png',
-    'pol3.png': '/images/gallery/pol3.png',
-    'pol4.png': '/images/gallery/pol4.png',
-    'pol5.png': '/images/gallery/pol5.png',
-    'pol6.png': '/images/gallery/pol6.png',
-    'pol7.png': '/images/gallery/pol7.png',
-    'pol8.png': '/images/gallery/pol8.png',
 };
 
 export const GALLERY_FALLBACKS = [
@@ -34,7 +29,7 @@ export const GALLERY_FALLBACKS = [
     '/images/gallery/pol8.png',
 ];
 
-/** Convert legacy /storage/ and absolute URLs to /images/ paths. */
+/** Redirect legacy /storage/ URLs to /images/ (public paths). */
 export function normalizeImagePath(path) {
     if (!path) {
         return path;
@@ -50,8 +45,8 @@ export function normalizeImagePath(path) {
         }
     }
 
-    if (normalized.startsWith('/storage/app/public/')) {
-        normalized = normalized.replace('/storage/app/public/', '/images/');
+    if (normalized.startsWith('/storage/images/')) {
+        return normalized.replace('/storage/images/', '/images/');
     }
 
     if (normalized.startsWith('/storage/')) {
@@ -67,28 +62,18 @@ export function normalizeImagePath(path) {
     return normalized;
 }
 
-/** Ordered list of URLs to try when the primary image fails. */
 export function getImageFallbacks(path) {
     const normalized = normalizeImagePath(path);
-    const fallbacks = [normalized];
 
-    if (path && path !== normalized) {
-        fallbacks.push(String(path));
-    }
-
-    return [...new Set(fallbacks.filter(Boolean))];
+    return [...new Set([normalized, path].filter(Boolean))];
 }
 
-/** Normalize gallery API items; map legacy /storage/ names to /images/. */
 export function normalizeGalleryItems(items) {
     if (!Array.isArray(items) || items.length === 0) {
         return GALLERY_FALLBACKS;
     }
 
-    const normalized = items
-        .map(normalizeImagePath)
-        .filter(Boolean);
-
+    const normalized = items.map(normalizeImagePath).filter(Boolean);
     const unique = [...new Set(normalized)];
 
     return unique.length > 0 ? unique : GALLERY_FALLBACKS;
