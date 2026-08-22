@@ -22,8 +22,8 @@
       "_site-CF46_0Ef.js"
     ]
   },
-  "_OptimizedImage-vtPL2Et1.js": {
-    "file": "assets/OptimizedImage-vtPL2Et1.js",
+  "_OptimizedImage-ZYzWu807.js": {
+    "file": "assets/OptimizedImage-ZYzWu807.js",
     "name": "OptimizedImage",
     "imports": [
       "_vendor-react-DLtBmWsw.js"
@@ -203,14 +203,14 @@
     ]
   },
   "resources/js/Pages/Components/Gallery.jsx": {
-    "file": "assets/Gallery-C6ePgBXe.js",
+    "file": "assets/Gallery-BXdk90Z3.js",
     "name": "Gallery",
     "src": "resources/js/Pages/Components/Gallery.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-react-DLtBmWsw.js",
       "_axiosInstance-Bm8HXz3v.js",
-      "_OptimizedImage-vtPL2Et1.js",
+      "_OptimizedImage-ZYzWu807.js",
       "_vendor-inertia-BI7mxU6z.js",
       "_vendor-DeS2-32b.js"
     ]
@@ -229,13 +229,13 @@
     ]
   },
   "resources/js/Pages/Components/Hero.jsx": {
-    "file": "assets/Hero-YswWB90b.js",
+    "file": "assets/Hero-BQWDB3fA.js",
     "name": "Hero",
     "src": "resources/js/Pages/Components/Hero.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-react-DLtBmWsw.js",
-      "_OptimizedImage-vtPL2Et1.js",
+      "_OptimizedImage-ZYzWu807.js",
       "_vendor-inertia-BI7mxU6z.js",
       "_vendor-DeS2-32b.js"
     ]
@@ -264,25 +264,25 @@
     ]
   },
   "resources/js/Pages/Components/SaleReady360.jsx": {
-    "file": "assets/SaleReady360-Im7DIMNz.js",
+    "file": "assets/SaleReady360-DM6Dg1by.js",
     "name": "SaleReady360",
     "src": "resources/js/Pages/Components/SaleReady360.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-react-DLtBmWsw.js",
-      "_OptimizedImage-vtPL2Et1.js",
+      "_OptimizedImage-ZYzWu807.js",
       "_vendor-inertia-BI7mxU6z.js",
       "_vendor-DeS2-32b.js"
     ]
   },
   "resources/js/Pages/Components/ServiceCardsDetailed.jsx": {
-    "file": "assets/ServiceCardsDetailed-DIL6Pf6i.js",
+    "file": "assets/ServiceCardsDetailed-BO1xQE_k.js",
     "name": "ServiceCardsDetailed",
     "src": "resources/js/Pages/Components/ServiceCardsDetailed.jsx",
     "isDynamicEntry": true,
     "imports": [
       "_vendor-react-DLtBmWsw.js",
-      "_OptimizedImage-vtPL2Et1.js",
+      "_OptimizedImage-ZYzWu807.js",
       "_vendor-inertia-BI7mxU6z.js",
       "_vendor-DeS2-32b.js"
     ]
@@ -310,7 +310,7 @@
     ]
   },
   "resources/js/Pages/HomeTest.jsx": {
-    "file": "assets/HomeTest-VznW-2hB.js",
+    "file": "assets/HomeTest-Bk-EJxFn.js",
     "name": "HomeTest",
     "src": "resources/js/Pages/HomeTest.jsx",
     "isDynamicEntry": true,
@@ -325,7 +325,7 @@
       "resources/js/Pages/Components/Reviews.jsx",
       "_site-CF46_0Ef.js",
       "_Logo-CxzB8rCk.js",
-      "_OptimizedImage-vtPL2Et1.js",
+      "_OptimizedImage-ZYzWu807.js",
       "_vendor-DeS2-32b.js",
       "_vendor-inertia-BI7mxU6z.js",
       "_axiosInstance-Bm8HXz3v.js"
@@ -397,7 +397,7 @@
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-JEB5RCp9.js",
+    "file": "assets/app-Dqihnm3F.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
