@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { getImageFallbacks } from '@/utils/imagePath';
 
 export default function OptimizedImage({
     src,
@@ -12,15 +13,22 @@ export default function OptimizedImage({
 }) {
     const imgRef = useRef(null);
     const [loaded, setLoaded] = useState(false);
+    const [sourceIndex, setSourceIndex] = useState(0);
+    const sources = useMemo(() => getImageFallbacks(src), [src]);
+    const currentSrc = sources[sourceIndex] ?? src;
 
     useEffect(() => {
         setLoaded(false);
+        setSourceIndex(0);
+    }, [src]);
+
+    useEffect(() => {
         const img = imgRef.current;
         // Safari/iOS: cached images may already be complete before onLoad binds
         if (img?.complete && img.naturalWidth > 0) {
             setLoaded(true);
         }
-    }, [src]);
+    }, [currentSrc]);
 
     const handleLoad = (event) => {
         setLoaded(true);
@@ -28,14 +36,18 @@ export default function OptimizedImage({
     };
 
     const handleError = () => {
-        // Don't leave blank forever on mobile if load fails
+        if (sourceIndex < sources.length - 1) {
+            setSourceIndex((index) => index + 1);
+            return;
+        }
+
         setLoaded(true);
     };
 
     const img = (
         <img
             ref={imgRef}
-            src={src}
+            src={currentSrc}
             alt={alt}
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"

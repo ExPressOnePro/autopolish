@@ -13,7 +13,7 @@ export default function ServicePPF() {
                 {/* Изображение */}
                 <div className="relative rounded-2xl overflow-hidden border border-[#1b3247] shadow-lg">
                     <img
-                        src="/storage/app/public/ppf-example.jpg" // поменяй путь под свой
+                        src="/images/services/002.jpg"
                         alt="Оклейка бронеплёнкой"
                         className="w-full h-full object-cover"
                     />

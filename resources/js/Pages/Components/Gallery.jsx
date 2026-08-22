@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axiosInstance from '@/Pages/axiosInstance.js';
 import OptimizedImage from '@/Components/OptimizedImage';
+import { GALLERY_FALLBACKS, normalizeGalleryItems } from '@/utils/imagePath';
 
 export default function Gallery() {
     const [gallery, setGallery] = useState([]);
@@ -16,18 +17,13 @@ export default function Gallery() {
             try {
                 const res = await axiosInstance.get('/gallery');
                 if (!cancelled) {
-                    setGallery(Array.isArray(res.data) ? res.data : []);
+                    setGallery(normalizeGalleryItems(res.data));
                 }
             } catch (err) {
                 console.error('Ошибка загрузки галереи:', err);
                 if (!cancelled) {
                     setError('Не удалось загрузить фото');
-                    // fallback relative paths if API fails
-                    setGallery([
-                        '/images/gallery/002.jpg',
-                        '/images/gallery/003.jpg',
-                        '/images/gallery/cardPolish001.jpg',
-                    ]);
+                    setGallery(GALLERY_FALLBACKS);
                 }
             } finally {
                 if (!cancelled) setLoading(false);

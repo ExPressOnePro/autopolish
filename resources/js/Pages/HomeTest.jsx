@@ -8,6 +8,7 @@ import Reviews from '@/Pages/Components/Reviews.jsx';
 import SeoHead from '@/Components/SeoHead.jsx';
 import Logo from '@/Components/Logo.jsx';
 import { site } from '@/config/site';
+import { normalizeImagePath } from '@/utils/imagePath';
 
 const Gallery = lazy(() => import('@/Pages/Components/Gallery'));
 const Pricing = lazy(() => import('@/Pages/Components/Pricing'));
@@ -25,6 +26,9 @@ function SectionFallback({ label }) {
 
 export default function HomeTest({ image, before, after, averageRating, totalReviews, reviews = [], siteUrl }) {
     const [clip, setClip] = useState(50);
+    const heroImage = normalizeImagePath(image);
+    const beforeImage = normalizeImagePath(before);
+    const afterImage = normalizeImagePath(after);
 
     const handleRange = (e) => setClip(Number(e.target.value));
 
@@ -44,7 +48,7 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
         <div className="relative text-[#eaf2fb] font-sans min-h-screen overflow-x-hidden scroll-smooth">
             <SeoHead
                 url={siteUrl}
-                image={image}
+                image={heroImage}
                 averageRating={averageRating}
                 totalReviews={totalReviews}
             />
@@ -63,13 +67,13 @@ export default function HomeTest({ image, before, after, averageRating, totalRev
                 Записаться
             </a>
 
-            <Hero image={image} averageRating={averageRating} totalReviews={totalReviews} />
+            <Hero image={heroImage} averageRating={averageRating} totalReviews={totalReviews} />
 
             <div id="Услуги" className="container mx-auto">
                 <ServiceCardsDetailed />
             </div>
 
-            <BeforeAfter before={before} after={after} clip={clip} handleRange={handleRange} />
+            <BeforeAfter before={beforeImage} after={afterImage} clip={clip} handleRange={handleRange} />
 
             <SaleReady360 scrollToId={scrollToId} />
 
